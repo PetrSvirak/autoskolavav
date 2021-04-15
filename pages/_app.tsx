@@ -1,13 +1,31 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 import React from "react";
-import "../styles/globals.css";
+import { Layout } from "../components/layout";
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <ChakraProvider>
+const theme = extendTheme({
+  colors: {
+    brand: {
+      100: "#f7fafc",
+      // ...
+      900: "#1a202c",
+    },
+  },
+  breakpoints: createBreakpoints({
+    sm: "30em",
+    md: "48em",
+    lg: "62em",
+    xl: "80em",
+    "2xl": "96em",
+  }),
+});
+
+const App = ({ Component, pageProps }) => (
+  <ChakraProvider theme={theme}>
+    <Layout>
       <Component {...pageProps} />
-    </ChakraProvider>
-  );
-}
+    </Layout>
+  </ChakraProvider>
+);
 
-export default MyApp;
+export default App;

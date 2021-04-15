@@ -12,7 +12,7 @@ export const Layout = ({ children }) => {
       templateRows: "50px 1fr 150px",
       templateAreas: "'header header' 'nav content' 'footer footer'",
     },
-    sm: {
+    base: {
       h: "100vh",
       w: "100%",
       templateAreas: "'header' 'nav' 'content' 'footer'",

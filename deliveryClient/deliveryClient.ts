@@ -19,6 +19,8 @@ import { Vehicle } from "../models/vehicle";
 const getDeliveryClient = (): DeliveryClient => {
   const usePreviewMode = !!process.env.previewApiKey;
 
+  console.log("ProjectID " + process.env.projectId)
+
   return new DeliveryClient({
     projectId: process.env.projectId,
     previewApiKey: process.env.previewApiKey,

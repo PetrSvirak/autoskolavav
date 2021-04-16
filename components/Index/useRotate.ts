@@ -25,7 +25,7 @@ export const useRotate = (
   const resumeRotation = useCallback(() => setIsHovered(false), []);
 
   useInterval(() => {
-    if (!totalItems || isHovered) {
+    if (totalItems <= 1 || isHovered) {
       setPassedMs(0);
       return;
     }

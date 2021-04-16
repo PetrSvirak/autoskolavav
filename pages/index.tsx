@@ -8,27 +8,29 @@ import { ActionDots } from "../components/Index/ActionDots";
 import { ActionItem } from "../components/Index/ActionItem";
 import { useRotate } from "../components/Index/useRotate";
 import { convertBackgroundColor } from "../components/Index/utils";
+import { RemainingSlider } from "../components/Index/RemainingSlider";
 
 type IndexProps = {
   readonly actions: ActionViewModel[];
 };
 
-const flipIntervalMs = 5000;
-const tickIntervalMs = 100;
+const FlipIntervalMs = 5000;
+const TickIntervalMs = 100;
 
 const Index: React.FunctionComponent<IndexProps> = ({ actions }) => {
+  const hasMultipleActions = actions.length > 1;
   const areDotsBelow = useBreakpointValue({ base: false, md: true });
   const { activeIndex, passedMs, pauseRotationAt, resumeRotation } = useRotate(
     actions.length,
-    flipIntervalMs,
-    tickIntervalMs
+    FlipIntervalMs,
+    TickIntervalMs
   );
 
   if (!actions.length) {
     return null;
   }
 
-  const dots = (
+  const dots = hasMultipleActions && (
     <ActionDots
       activeIndex={activeIndex}
       direction={{ base: "column", md: "row" }}
@@ -45,13 +47,18 @@ const Index: React.FunctionComponent<IndexProps> = ({ actions }) => {
       <Center>
         <Stack spacing={4} direction={{ base: "row", md: "column" }}>
           {!areDotsBelow && dots}
+
           <ActionItem
             action={actions[activeIndex]}
             onMouseEnter={pauseRotationAt(activeIndex)}
             onMouseLeave={resumeRotation}
-            passedTicks={passedMs}
-            totalTicks={flipIntervalMs}
+            renderSlider={() =>
+              hasMultipleActions && (
+                <RemainingSlider passedMs={passedMs} totalMs={FlipIntervalMs} />
+              )
+            }
           />
+
           {areDotsBelow && dots}
         </Stack>
       </Center>

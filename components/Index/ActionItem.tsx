@@ -1,21 +1,18 @@
 import React, { MouseEventHandler } from "react";
 import { Center, Heading, Stack, Text } from "@chakra-ui/react";
-import { RemainingSlider } from "./RemainingSlider";
 
 type ActionItemProps = {
   readonly action: ActionViewModel;
   readonly onMouseEnter: MouseEventHandler;
   readonly onMouseLeave: MouseEventHandler;
-  readonly passedTicks: number;
-  readonly totalTicks: number;
+  readonly renderSlider?: () => JSX.Element;
 };
 
 export const ActionItem: React.FunctionComponent<ActionItemProps> = ({
   action,
   onMouseEnter,
   onMouseLeave,
-  passedTicks,
-  totalTicks,
+  renderSlider,
 }) => (
   <Stack
     bg={action.backgroundColor}
@@ -44,6 +41,6 @@ export const ActionItem: React.FunctionComponent<ActionItemProps> = ({
       </Stack>
     </Center>
 
-    <RemainingSlider passedMs={passedTicks} totalMs={totalTicks} />
+    {renderSlider?.()}
   </Stack>
 );

@@ -11,29 +11,39 @@ import {
   SimpleGrid,
   Stack,
 } from "@chakra-ui/react";
+import { Gallery } from "../models/gallery";
+import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 
 type PhotoGalleryProps = {
-  readonly vehicleViewModels: readonly [
-    string,
-    readonly PhotoGalleryVehicleViewModel[]
-  ][];
+  readonly photosByType: readonly [string, readonly PhotoGalleryViewModel[]][];
 };
 
-type PhotoGalleryVehicleViewModel = {
+type PhotoGalleryViewModel = {
   readonly photoSrc: string;
   readonly name: string;
-  readonly type: string;
+  readonly typeCodeName: string;
+  readonly typeName: string;
 };
 
 const convertVehicleToPhotoGalleryViewModel = (
   vehicle: Vehicle
-): PhotoGalleryVehicleViewModel => ({
+): PhotoGalleryViewModel => ({
   name: vehicle.name.value,
   photoSrc: vehicle.photo.value[0].url,
-  type: vehicle.type.value[0].name,
+  typeCodeName: vehicle.type.value[0].codename,
+  typeName: vehicle.type.value[0].name,
 });
 
-const PhotoGallery: NextPage<PhotoGalleryProps> = ({ vehicleViewModels }) => (
+const convertOtherToPhotoGalleryViewModel = (
+  asset: ElementModels.AssetModel
+): PhotoGalleryViewModel => ({
+  name: asset.description,
+  photoSrc: asset.url,
+  typeCodeName: "z_last",
+  typeName: "Ostatní",
+});
+
+const PhotoGallery: NextPage<PhotoGalleryProps> = ({ photosByType }) => (
   <Container>
     <ContentHead pageName="Fotogalerie" />
     <Stack>
@@ -41,19 +51,21 @@ const PhotoGallery: NextPage<PhotoGalleryProps> = ({ vehicleViewModels }) => (
         Fotogalerie
       </Heading>
       <Stack spacing={4}>
-        {vehicleViewModels.map(([type, vehicles]) => (
+        {photosByType.map(([typeCodeName, photos]) => (
           <Stack
             as="section"
-            key={type}
+            key={typeCodeName}
             borderWidth={1}
             padding={4}
             rounded="md"
           >
-            <Heading as="h2" size="md">
-              {type}
-            </Heading>
+            {photos[0]?.typeName && (
+              <Heading as="h2" size="md">
+                {photos[0]?.typeName}
+              </Heading>
+            )}
             <SimpleGrid columns={2} gap={5}>
-              {vehicles.map((viewModel) => (
+              {photos.map((viewModel) => (
                 <Box key={viewModel.name}>
                   <Image src={viewModel.photoSrc} />
                 </Box>
@@ -69,27 +81,40 @@ const PhotoGallery: NextPage<PhotoGalleryProps> = ({ vehicleViewModels }) => (
 export default PhotoGallery;
 
 export const getServerSideProps: GetServerSideProps<PhotoGalleryProps> = async () => {
-  const data = await deliveryClient
+  const vehiclesResult = await deliveryClient
     .items<Vehicle>()
     .type("vehicle")
     .toPromise();
-  const photos = data.items
+  const vehicles = vehiclesResult.items
     .filter((item) => item.photo.value[0])
-    .map(convertVehicleToPhotoGalleryViewModel)
-    .reduce<Map<string, readonly PhotoGalleryVehicleViewModel[]>>(
+    .map(convertVehicleToPhotoGalleryViewModel);
+
+  const otherPhotosResult = await deliveryClient
+    .item<Gallery>("gallery")
+    .toPromise();
+  const others = otherPhotosResult.item.anotherGalleryPictures.value.map(
+    convertOtherToPhotoGalleryViewModel
+  );
+
+  const photos = [...vehicles, ...others]
+    .reduce<Map<string, readonly PhotoGalleryViewModel[]>>(
       (accumulator, current) =>
-        accumulator.has(current.type)
-          ? accumulator.set(current.type, [
-              ...accumulator.get(current.type),
+        accumulator.has(current.typeCodeName)
+          ? accumulator.set(current.typeCodeName, [
+              ...accumulator.get(current.typeCodeName),
               current,
             ])
-          : accumulator.set(current.type, [current]),
-      new Map<string, readonly PhotoGalleryVehicleViewModel[]>()
-    );
+          : accumulator.set(current.typeCodeName, [current]),
+      new Map<string, readonly PhotoGalleryViewModel[]>()
+    )
+    .entries();
+
+  const photosByType = Array.from(photos);
+  photosByType.sort((a, b) => a[0].localeCompare(b[0]));
 
   return {
     props: {
-      vehicleViewModels: Array.from(photos.entries()),
+      photosByType,
     },
   };
 };

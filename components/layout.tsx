@@ -27,16 +27,16 @@ export const Layout = ({ children }) => {
       </Head>
 
       <Grid {...gridConfig}>
-        <GridItem as="header" gridArea="header" bg={"yellow.100"}>
+        <GridItem as="header" gridArea="header">
           <Heading />
         </GridItem>
         <GridItem as="nav" gridArea="nav">
           <Menu />
         </GridItem>
-        <GridItem as="main" gridArea="content" bg={"blue.100"}>
+        <GridItem as="main" gridArea="content">
           {children}
         </GridItem>
-        <GridItem as="footer" gridArea="footer" bg={"orange.100"} />
+        <GridItem as="footer" gridArea="footer" />
       </Grid>
     </Center>
   );

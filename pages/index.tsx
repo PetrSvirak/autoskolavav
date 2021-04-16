@@ -1,5 +1,5 @@
 import React from "react";
-import {ContentHead} from "../components/contentHead";
+import { ContentHead } from "../components/contentHead";
 
 const Index = () => (
   <>

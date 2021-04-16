@@ -15,68 +15,66 @@ type RichTextHtmlParserProps = {
   readonly html: string;
 };
 
-const parseText = (text) => {
-  return text.content.replace("&nbsp;", " ");
-};
+const parseText = (text) => text.content.replaceAll("&nbsp;", " ").replaceAll("&amp;", "&");
 
-const parseElement = (element) => {
+const parseElement = (element, index) => {
   switch (element.tagName) {
     case "p":
-      return <Text>{element.children.map((node) => parseNode(node))}</Text>;
+      return <Text key={index}>{element.children.map((node, index) => parseNode(node, index))}</Text>;
     case "strong":
       return (
-        <Text as="strong">
-          {element.children.map((node) => parseNode(node))}
+        <Text key={index} as="strong">
+          {element.children.map((node, index) => parseNode(node, index))}
         </Text>
       );
     case "em":
       return (
-        <Text as="em">{element.children.map((node) => parseNode(node))}</Text>
+        <Text key={index} as="em">{element.children.map((node, index) => parseNode(node, index))}</Text>
       );
     case "h1":
       return (
-        <Heading as="h1" size="4xl">
-          {element.children.map((node) => parseNode(node))}
+        <Heading key={index} as="h1" size="4xl">
+          {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h2":
       return (
-        <Heading as="h2" size="3xl">
-          {element.children.map((node) => parseNode(node))}
+        <Heading key={index} as="h2" size="3xl">
+          {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h3":
       return (
-        <Heading as="h3" size="2xl">
-          {element.children.map((node) => parseNode(node))}
+        <Heading key={index} as="h3" size="2xl">
+          {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h4":
       return (
-        <Heading as="h4" size="1xl">
-          {element.children.map((node) => parseNode(node))}
+        <Heading key={index} as="h4" size="1xl">
+          {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "a":
       return (
-        <NextLink href={element.attributes[1].value} passHref>
-          <Link>{element.children.map((node) => parseNode(node))}</Link>
+        <NextLink key={index} href={element.attributes[1].value} passHref>
+          <Link>{element.children.map((node, index) => parseNode(node, index))}</Link>
         </NextLink>
       );
     case "ol":
       return (
-        <OrderedList>
-          {element.children.map((node) => parseNode(node))}
+        <OrderedList key={index}>
+          {element.children.map((node, index) => parseNode(node, index))}
         </OrderedList>
       );
     case "li":
       return (
-        <ListItem>{element.children.map((node) => parseNode(node))}</ListItem>
+        <ListItem key={index}>{element.children.map((node, index) => parseNode(node, index))}</ListItem>
       );
     case "ul":
       return (
-        <UnorderedList>
-          {element.children.map((node) => parseNode(node))}
+        <UnorderedList key={index}>
+          {element.children.map((node, index) => parseNode(node, index))}
         </UnorderedList>
       );
     default:
@@ -84,10 +82,10 @@ const parseElement = (element) => {
   }
 };
 
-const parseNode = (node) => {
+const parseNode = (node, index) => {
   switch (node.type) {
     case "element":
-      return parseElement(node);
+      return parseElement(node, index);
     case "text":
       return parseText(node);
     default:
@@ -97,7 +95,8 @@ const parseNode = (node) => {
 
 const ArticleHtmlParser: NextPage<RichTextHtmlParserProps> = ({ html }) => {
   const parsedHtml = parse(html);
-  return parsedHtml.map((node) => parseNode(node));
+
+  return parsedHtml.map((node, index) => parseNode(node, index));
 };
 
 export default ArticleHtmlParser;

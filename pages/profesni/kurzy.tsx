@@ -3,4 +3,7 @@ import { Article, createServerSideProps } from "../../components/Article";
 
 export default Article;
 
-export const getServerSideProps = createServerSideProps("quick_courses", "Rychlokurzy")
+export const getServerSideProps = createServerSideProps(
+  "professional_courses",
+  "Kurzy"
+);

@@ -1,6 +1,6 @@
 import React from "react";
 import { ContentHead } from "../components/contentHead";
-import { GetStaticPropsResult, NextPage } from "next";
+import { GetServerSideProps, GetStaticPropsResult, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../models/vehicle";
 import {
@@ -68,9 +68,7 @@ const PhotoGallery: NextPage<PhotoGalleryProps> = ({ vehicleViewModels }) => (
 
 export default PhotoGallery;
 
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<PhotoGalleryProps>
-> {
+export const getServerSideProps: GetServerSideProps<PhotoGalleryProps> = async () => {
   const data = await deliveryClient
     .items<Vehicle>()
     .type("vehicle")
@@ -94,4 +92,4 @@ export async function getStaticProps(): Promise<
       vehicleViewModels: Array.from(photos.entries()),
     },
   };
-}
+};

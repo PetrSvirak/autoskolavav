@@ -1,6 +1,6 @@
 import React from "react";
 import { ContentHead } from "../components/contentHead";
-import { GetServerSideProps, GetStaticPropsResult, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../models/vehicle";
 import {

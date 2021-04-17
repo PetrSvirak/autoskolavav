@@ -13,7 +13,9 @@ export const getStaticProps = async () => {
   const actionsResult = await deliveryClient
     .items<Action>()
     .type("action")
+    .orderByDescending("system.last_modified")
     .toPromise();
+
   const actions = actionsResult?.items.map<ActionViewType>((action) => ({
     backgroundColor: convertBackgroundColor(action),
     note: action.note.value,

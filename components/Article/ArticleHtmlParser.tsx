@@ -15,12 +15,17 @@ type RichTextHtmlParserProps = {
   readonly html: string;
 };
 
-const parseText = (text) => text.content.replaceAll("&nbsp;", " ").replaceAll("&amp;", "&");
+const parseText = (text) =>
+  text.content.replaceAll("&nbsp;", " ").replaceAll("&amp;", "&");
 
 const parseElement = (element, index) => {
   switch (element.tagName) {
     case "p":
-      return <Text key={index}>{element.children.map((node, index) => parseNode(node, index))}</Text>;
+      return (
+        <Text key={index}>
+          {element.children.map((node, index) => parseNode(node, index))}
+        </Text>
+      );
     case "strong":
       return (
         <Text key={index} as="strong">
@@ -29,7 +34,9 @@ const parseElement = (element, index) => {
       );
     case "em":
       return (
-        <Text key={index} as="em">{element.children.map((node, index) => parseNode(node, index))}</Text>
+        <Text key={index} as="em">
+          {element.children.map((node, index) => parseNode(node, index))}
+        </Text>
       );
     case "h1":
       return (
@@ -58,7 +65,9 @@ const parseElement = (element, index) => {
     case "a":
       return (
         <NextLink key={index} href={element.attributes[1].value} passHref>
-          <Link>{element.children.map((node, index) => parseNode(node, index))}</Link>
+          <Link>
+            {element.children.map((node, index) => parseNode(node, index))}
+          </Link>
         </NextLink>
       );
     case "ol":
@@ -69,7 +78,9 @@ const parseElement = (element, index) => {
       );
     case "li":
       return (
-        <ListItem key={index}>{element.children.map((node, index) => parseNode(node, index))}</ListItem>
+        <ListItem key={index}>
+          {element.children.map((node, index) => parseNode(node, index))}
+        </ListItem>
       );
     case "ul":
       return (
@@ -93,10 +104,10 @@ const parseNode = (node, index) => {
   }
 };
 
-const ArticleHtmlParser: NextPage<RichTextHtmlParserProps> = ({ html }) => {
+export const ArticleHtmlParser: NextPage<RichTextHtmlParserProps> = ({
+  html,
+}) => {
   const parsedHtml = parse(html);
 
   return parsedHtml.map((node, index) => parseNode(node, index));
 };
-
-export default ArticleHtmlParser;

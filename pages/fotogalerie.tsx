@@ -1,6 +1,6 @@
 import React from "react";
 import { ContentHead } from "../components/contentHead";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../models/vehicle";
 import {
@@ -80,7 +80,7 @@ const PhotoGallery: NextPage<PhotoGalleryProps> = ({ photosByType }) => (
 
 export default PhotoGallery;
 
-export const getServerSideProps: GetServerSideProps<PhotoGalleryProps> = async () => {
+export const getStaticProps: GetStaticProps<PhotoGalleryProps> = async () => {
   const vehiclesResult = await deliveryClient
     .items<Vehicle>()
     .type("vehicle")

@@ -2,7 +2,7 @@ import { Center, Grid, GridItem, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import Head from "next/head";
 import { Menu } from "./menu";
-import { Heading } from "./heading";
+import { SiteHeading } from "./siteHeading";
 
 export const Layout = ({ children }) => {
   const gridConfig = useBreakpointValue({
@@ -15,7 +15,8 @@ export const Layout = ({ children }) => {
       h: "100vh",
       w: "800px",
       templateColumns: "250px 1fr",
-      templateRows: "50px 1fr 150px",
+      templateRows:
+        "minmax(min-content, max-content) 1fr minmax(min-content, max-content)",
       templateAreas: "'header header' 'nav content' 'footer footer'",
     },
   });
@@ -28,7 +29,7 @@ export const Layout = ({ children }) => {
 
       <Grid {...gridConfig}>
         <GridItem as="header" gridArea="header">
-          <Heading />
+          <SiteHeading />
         </GridItem>
         <GridItem as="nav" gridArea="nav">
           <Menu />

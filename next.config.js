@@ -1,5 +1,8 @@
 module.exports = {
   basePath: "",
+  env: {
+    isPreviewSite: !!process.env.previewApiKey,
+  },
 
   async redirects() {
     return [

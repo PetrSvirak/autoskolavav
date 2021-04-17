@@ -1,7 +1,6 @@
 import React from "react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { TermsPage } from "../models/terms_page";
-import { GetServerSidePropsResult } from "next";
 import { Term } from "../models/term";
 import { Date as SchoolDate } from "../models/date";
 import {
@@ -18,6 +17,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { ContentHead } from "./contentHead";
+import { GetStaticProps } from "next";
 
 type CourseDateType = {
   date: string; // ISO string
@@ -87,9 +87,9 @@ export const CourseStartDates: React.FC<Props> = ({ courseGroups }) => (
   </Container>
 );
 
-export const createGetServerSideProps = (
+export const createGetCourseStartDatesProps = (
   type: "professional_terms" | "classic_terms"
-) => async (): Promise<GetServerSidePropsResult<Props>> => {
+): GetStaticProps<Props> => async () => {
   try {
     const termsPage = await deliveryClient.item<TermsPage>(type).toPromise();
 

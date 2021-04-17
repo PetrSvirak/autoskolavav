@@ -1,6 +1,12 @@
 import React from "react";
-import { Article, createServerSideProps } from "../../components/Article";
+import {
+  Article,
+  createGetArticleProps,
+} from "../../components/Article/Article";
 
 export default Article;
 
-export const getServerSideProps = createServerSideProps("quick_courses", "Rychlokurzy")
+export const getStaticProps = createGetArticleProps(
+  "quick_courses",
+  "Rychlokurzy"
+);

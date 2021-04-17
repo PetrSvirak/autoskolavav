@@ -3,7 +3,7 @@ import { ContentHead } from "../components/contentHead";
 import { Center, Container, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { Action } from "../models/action";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { ActionDots } from "../components/Index/ActionDots";
 import { ActionItem } from "../components/Index/ActionItem";
 import { useRotate } from "../components/Index/useRotate";
@@ -68,7 +68,7 @@ const Index: React.FunctionComponent<IndexProps> = ({ actions }) => {
 
 export default Index;
 
-export const getServerSideProps: GetServerSideProps<IndexProps> = async () => {
+export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const actionsResult = await deliveryClient
     .items<Action>()
     .type("action")

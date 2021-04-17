@@ -1,8 +1,8 @@
 import {
   CourseStartDates,
-  createGetServerSideProps,
+  createGetCourseStartDatesProps,
 } from "../../components/courseStartDates";
 
 export default CourseStartDates;
 
-export const getServerSideProps = createGetServerSideProps("classic_terms");
+export const getStaticProps = createGetCourseStartDatesProps("classic_terms");

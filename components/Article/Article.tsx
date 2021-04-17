@@ -1,10 +1,10 @@
 import React from "react";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { Container, Heading, Stack } from "@chakra-ui/react";
-import { ContentHead } from "./contentHead";
-import ArticleHtmlParser from "./ArticleHtmlParser";
-import { deliveryClient } from "../deliveryClient/deliveryClient";
-import { Article as ArticleModel } from "../models/article";
+import { ContentHead } from "../contentHead";
+import { deliveryClient } from "../../deliveryClient/deliveryClient";
+import { Article as ArticleModel } from "../../models/article";
+import { ArticleHtmlParser } from "./ArticleHtmlParser";
 
 type ArticleProps = {
   readonly articleHtml: string;
@@ -26,12 +26,10 @@ export const Article: NextPage<ArticleProps> = ({ articleHtml, pageName }) => {
   );
 };
 
-export default ArticleProps;
-
-export const createServerSideProps = (
+export const createGetArticleProps = (
   codename: string,
   pageName: string
-) => async () => {
+): GetStaticProps<ArticleProps> => async () => {
   const article = await deliveryClient
     .item<ArticleModel>(codename)
     .queryConfig({

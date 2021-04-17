@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Gallery } from "../models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
+import { catchEmAllStatic } from "../components/catchEmAllStatic";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;
@@ -38,7 +39,7 @@ const convertOtherToPhotoGalleryViewModel = (
   typeName: "Ostatní",
 });
 
-export const getStaticProps = async () => {
+export const getStaticProps = catchEmAllStatic(async () => {
   const vehiclesResult = await deliveryClient
     .items<Vehicle>()
     .type("vehicle")
@@ -75,7 +76,7 @@ export const getStaticProps = async () => {
       photosByType,
     },
   };
-};
+});
 
 const PhotoGallery: NextPage<
   InferGetServerSidePropsType<typeof getStaticProps>

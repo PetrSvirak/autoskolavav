@@ -4,7 +4,7 @@ import {
   GetStaticPropsResult,
 } from "next";
 
-type Creator<Of extends Function, T> = T extends (a: any, b: any, c: any) => Of
+type Creator<Of extends Function, T> = T extends (...rest: any) => Of
   ? T
   : never;
 

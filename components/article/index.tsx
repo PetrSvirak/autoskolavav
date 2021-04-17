@@ -5,41 +5,37 @@ import { deliveryClient } from "../../deliveryClient/deliveryClient";
 import { Article as ArticleModel } from "../../models/article";
 import { ArticleHtmlParser } from "./articleHtmlParser";
 import { InferCreatorStaticPropsType } from "../inferCreatorPropsType";
+import { catchEmAllStatic } from "../catchEmAllStatic";
 
-export const createGetArticleProps = (
-  codename: string,
-  pageName: string
-) => async () => {
-  const article = await deliveryClient
-    .item<ArticleModel>(codename)
-    .queryConfig({
-      urlSlugResolver: (link, _context) => {
-        return { url: link.urlSlug };
+export const createGetArticleProps = (codename: string, pageName: string) =>
+  catchEmAllStatic(async () => {
+    const article = await deliveryClient
+      .item<ArticleModel>(codename)
+      .queryConfig({
+        urlSlugResolver: (link, _context) => {
+          return { url: link.urlSlug };
+        },
+      })
+      .toPromise();
+
+    return {
+      props: {
+        pageName,
+        articleHtml: article.item.text.resolveHtml(),
       },
-    })
-    .toPromise();
-
-  return {
-    props: {
-      pageName,
-      articleHtml: article.item.text.resolveHtml(),
-    },
-  };
-};
+    };
+  });
 
 export const Article: NextPage<
   InferCreatorStaticPropsType<typeof createGetArticleProps>
-> = ({ articleHtml, pageName }) => {
-  console.log(articleHtml);
-  return (
-    <Container>
-      <ContentHead pageName={pageName} />
-      <Stack>
-        <Heading as="h1" size="lg">
-          {pageName}
-        </Heading>
-        <ArticleHtmlParser html={articleHtml} />
-      </Stack>
-    </Container>
-  );
-};
+> = ({ articleHtml, pageName }) => (
+  <Container>
+    <ContentHead pageName={pageName} />
+    <Stack>
+      <Heading as="h1" size="lg">
+        {pageName}
+      </Heading>
+      <ArticleHtmlParser html={articleHtml} />
+    </Stack>
+  </Container>
+);

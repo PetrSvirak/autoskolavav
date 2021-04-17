@@ -8,8 +8,10 @@ import { ActionItem } from "../components/index/actionItem";
 import { useRotate } from "../components/index/useRotate";
 import { convertBackgroundColor } from "../components/index/utils";
 import { RemainingSlider } from "../components/index/remainingSlider";
+import { catchEmAllStatic } from "../components/catchEmAllStatic";
+import { Custom404 } from "../components/custom404";
 
-export const getStaticProps = async () => {
+export const getStaticProps = catchEmAllStatic(async () => {
   const actionsResult = await deliveryClient
     .items<Action>()
     .type("action")
@@ -28,7 +30,7 @@ export const getStaticProps = async () => {
       actions,
     },
   };
-};
+});
 
 const FlipIntervalMs = 5000;
 const TickIntervalMs = 100;
@@ -45,7 +47,7 @@ const Index: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   );
 
   if (!actions.length) {
-    return null;
+    return <Custom404 />;
   }
 
   const dots = hasMultipleActions && (

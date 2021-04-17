@@ -7,11 +7,12 @@ import { ContentHead } from "../contentHead";
 import { NextPage } from "next";
 import { InferCreatorStaticPropsType } from "../inferCreatorPropsType";
 import { CourseGroup } from "./courseGroup";
+import { catchEmAllStatic } from "../catchEmAllStatic";
 
 export const createGetCourseStartDatesProps = (
   type: "professional_terms" | "classic_terms"
-) => async () => {
-  try {
+) =>
+  catchEmAllStatic(async () => {
     const termsPage = await deliveryClient.item<TermsPage>(type).toPromise();
 
     const courseGroups = termsPage.item.terms.linkedItemCodenames
@@ -42,15 +43,7 @@ export const createGetCourseStartDatesProps = (
         courseGroups,
       },
     };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: {
-        courseGroups: [],
-      },
-    };
-  }
-};
+  });
 
 export const CourseStartDates: NextPage<
   InferCreatorStaticPropsType<typeof createGetCourseStartDatesProps>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEventHandler } from "react";
+import { FunctionComponent } from "react";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { StackDirection } from "@chakra-ui/layout/dist/types/stack.utils";
 import { SystemProps } from "@chakra-ui/system";

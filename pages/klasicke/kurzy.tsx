@@ -1,8 +1,4 @@
-import React from "react";
-import {
-  Article,
-  createGetArticleProps,
-} from "../../components/Article/Article";
+import { Article, createGetArticleProps } from "../../components/article";
 
 export default Article;
 

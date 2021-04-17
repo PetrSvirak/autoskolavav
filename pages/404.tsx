@@ -1,6 +1,7 @@
 import { Center, Container, Divider, Heading, Stack } from "@chakra-ui/react";
+import { NextPage } from "next";
 
-const custom404: React.FunctionComponent = () => (
+const custom404: NextPage = () => (
   <Container>
     <Center h="50vh">
       <Stack direction="row" spacing={4}>

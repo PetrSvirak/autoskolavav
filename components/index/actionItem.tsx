@@ -1,14 +1,14 @@
-import React, { MouseEventHandler } from "react";
+import { FunctionComponent, MouseEventHandler } from "react";
 import { Center, Heading, Stack, Text } from "@chakra-ui/react";
 
 type ActionItemProps = {
-  readonly action: ActionViewModel;
+  readonly action: ActionViewType;
   readonly onMouseEnter: MouseEventHandler;
   readonly onMouseLeave: MouseEventHandler;
   readonly renderSlider?: () => JSX.Element;
 };
 
-export const ActionItem: React.FunctionComponent<ActionItemProps> = ({
+export const ActionItem: FunctionComponent<ActionItemProps> = ({
   action,
   onMouseEnter,
   onMouseLeave,

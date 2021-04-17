@@ -1,6 +1,5 @@
-import React from "react";
 import { ContentHead } from "../components/contentHead";
-import { GetStaticProps, NextPage } from "next";
+import { InferGetServerSidePropsType, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../models/vehicle";
 import {
@@ -13,10 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { Gallery } from "../models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
-
-type PhotoGalleryProps = {
-  readonly photosByType: readonly [string, readonly PhotoGalleryViewModel[]][];
-};
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;
@@ -43,44 +38,7 @@ const convertOtherToPhotoGalleryViewModel = (
   typeName: "Ostatní",
 });
 
-const PhotoGallery: NextPage<PhotoGalleryProps> = ({ photosByType }) => (
-  <Container>
-    <ContentHead pageName="Fotogalerie" />
-    <Stack>
-      <Heading as="h1" size="lg">
-        Fotogalerie
-      </Heading>
-      <Stack spacing={4}>
-        {photosByType.map(([typeCodeName, photos]) => (
-          <Stack
-            as="section"
-            key={typeCodeName}
-            borderWidth={1}
-            padding={4}
-            rounded="md"
-          >
-            {photos[0]?.typeName && (
-              <Heading as="h2" size="md">
-                {photos[0]?.typeName}
-              </Heading>
-            )}
-            <SimpleGrid columns={2} gap={5}>
-              {photos.map((viewModel) => (
-                <Box key={viewModel.name}>
-                  <Image src={viewModel.photoSrc} />
-                </Box>
-              ))}
-            </SimpleGrid>
-          </Stack>
-        ))}
-      </Stack>
-    </Stack>
-  </Container>
-);
-
-export default PhotoGallery;
-
-export const getStaticProps: GetStaticProps<PhotoGalleryProps> = async () => {
+export const getStaticProps = async () => {
   const vehiclesResult = await deliveryClient
     .items<Vehicle>()
     .type("vehicle")
@@ -118,3 +76,42 @@ export const getStaticProps: GetStaticProps<PhotoGalleryProps> = async () => {
     },
   };
 };
+
+const PhotoGallery: NextPage<
+  InferGetServerSidePropsType<typeof getStaticProps>
+> = ({ photosByType }) => (
+  <Container>
+    <ContentHead pageName="Fotogalerie" />
+    <Stack>
+      <Heading as="h1" size="lg">
+        Fotogalerie
+      </Heading>
+      <Stack spacing={4}>
+        {photosByType.map(([typeCodeName, photos]) => (
+          <Stack
+            as="section"
+            key={typeCodeName}
+            borderWidth={1}
+            padding={4}
+            rounded="md"
+          >
+            {photos[0]?.typeName && (
+              <Heading as="h2" size="md">
+                {photos[0]?.typeName}
+              </Heading>
+            )}
+            <SimpleGrid columns={2} gap={5}>
+              {photos.map((viewModel) => (
+                <Box key={viewModel.name}>
+                  <Image src={viewModel.photoSrc} />
+                </Box>
+              ))}
+            </SimpleGrid>
+          </Stack>
+        ))}
+      </Stack>
+    </Stack>
+  </Container>
+);
+
+export default PhotoGallery;

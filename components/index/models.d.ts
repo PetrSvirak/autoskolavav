@@ -1,4 +1,4 @@
-type ActionViewModel = {
+type ActionViewType = {
   readonly backgroundColor: string;
   readonly note: string;
   readonly subtitle: string;

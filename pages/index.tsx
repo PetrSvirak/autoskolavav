@@ -1,23 +1,39 @@
-import React from "react";
 import { ContentHead } from "../components/contentHead";
 import { Center, Container, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { Action } from "../models/action";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
-import { GetStaticProps } from "next";
-import { ActionDots } from "../components/Index/ActionDots";
-import { ActionItem } from "../components/Index/ActionItem";
-import { useRotate } from "../components/Index/useRotate";
-import { convertBackgroundColor } from "../components/Index/utils";
-import { RemainingSlider } from "../components/Index/RemainingSlider";
+import { InferGetServerSidePropsType, NextPage } from "next";
+import { ActionDots } from "../components/index/actionDots";
+import { ActionItem } from "../components/index/actionItem";
+import { useRotate } from "../components/index/useRotate";
+import { convertBackgroundColor } from "../components/index/utils";
+import { RemainingSlider } from "../components/index/remainingSlider";
 
-type IndexProps = {
-  readonly actions: ActionViewModel[];
+export const getStaticProps = async () => {
+  const actionsResult = await deliveryClient
+    .items<Action>()
+    .type("action")
+    .toPromise();
+  const actions = actionsResult?.items.map<ActionViewType>((action) => ({
+    backgroundColor: convertBackgroundColor(action),
+    note: action.note.value,
+    subtitle: action.subtitle.value,
+    title: action.title.value,
+  }));
+
+  return {
+    props: {
+      actions,
+    },
+  };
 };
 
 const FlipIntervalMs = 5000;
 const TickIntervalMs = 100;
 
-const Index: React.FunctionComponent<IndexProps> = ({ actions }) => {
+const Index: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
+  actions,
+}) => {
   const hasMultipleActions = actions.length > 1;
   const areDotsBelow = useBreakpointValue({ base: false, md: true });
   const { activeIndex, passedMs, pauseRotationAt, resumeRotation } = useRotate(
@@ -67,22 +83,3 @@ const Index: React.FunctionComponent<IndexProps> = ({ actions }) => {
 };
 
 export default Index;
-
-export const getStaticProps: GetStaticProps<IndexProps> = async () => {
-  const actionsResult = await deliveryClient
-    .items<Action>()
-    .type("action")
-    .toPromise();
-  const actions = actionsResult?.items.map<ActionViewModel>((action) => ({
-    backgroundColor: convertBackgroundColor(action),
-    note: action.note.value,
-    subtitle: action.subtitle.value,
-    title: action.title.value,
-  }));
-
-  return {
-    props: {
-      actions,
-    },
-  };
-};

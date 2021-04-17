@@ -6,9 +6,8 @@ import {
   ListItem,
   OrderedList,
 } from "@chakra-ui/react";
-import React from "react";
+import { FunctionComponent } from "react";
 import { parse } from "himalaya";
-import { NextPage } from "next";
 import NextLink from "next/link";
 
 type RichTextHtmlParserProps = {
@@ -104,7 +103,7 @@ const parseNode = (node, index) => {
   }
 };
 
-export const ArticleHtmlParser: NextPage<RichTextHtmlParserProps> = ({
+export const ArticleHtmlParser: FunctionComponent<RichTextHtmlParserProps> = ({
   html,
 }) => {
   const parsedHtml = parse(html);

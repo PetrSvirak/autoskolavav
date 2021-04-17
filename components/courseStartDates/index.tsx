@@ -1,13 +1,13 @@
 import { deliveryClient } from "../../deliveryClient/deliveryClient";
-import { TermsPage } from "../../models/terms_page";
-import { Term } from "../../models/term";
-import { Date as SchoolDate } from "../../models/date";
+import { TermsPage } from "../../deliveryClient/models/terms_page";
+import { Term } from "../../deliveryClient/models/term";
+import { Date as SchoolDate } from "../../deliveryClient/models/date";
 import { Container, Heading, Stack } from "@chakra-ui/react";
 import { ContentHead } from "../contentHead";
 import { NextPage } from "next";
-import { InferCreatorStaticPropsType } from "../inferCreatorPropsType";
+import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
 import { CourseGroup } from "./courseGroup";
-import { catchEmAllStatic } from "../catchEmAllStatic";
+import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 
 export const createGetCourseStartDatesProps = (
   type: "professional_terms" | "classic_terms"

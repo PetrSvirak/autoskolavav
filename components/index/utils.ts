@@ -1,4 +1,4 @@
-import { Action } from "../../models/action";
+import { Action } from "../../deliveryClient/models/action";
 
 export const convertBackgroundColor = ({
   background: { value },

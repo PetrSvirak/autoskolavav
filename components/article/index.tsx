@@ -2,10 +2,10 @@ import { NextPage } from "next";
 import { Container, Heading, Stack } from "@chakra-ui/react";
 import { ContentHead } from "../contentHead";
 import { deliveryClient } from "../../deliveryClient/deliveryClient";
-import { Article as ArticleModel } from "../../models/article";
+import { Article as ArticleModel } from "../../deliveryClient/models/article";
 import { ArticleHtmlParser } from "./articleHtmlParser";
-import { InferCreatorStaticPropsType } from "../inferCreatorPropsType";
-import { catchEmAllStatic } from "../catchEmAllStatic";
+import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
+import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 
 export const createGetArticleProps = (codename: string, pageName: string) =>
   catchEmAllStatic(async () => {

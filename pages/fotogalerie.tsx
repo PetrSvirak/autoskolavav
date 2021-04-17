@@ -1,7 +1,7 @@
 import { ContentHead } from "../components/contentHead";
 import { InferGetServerSidePropsType, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
-import { Vehicle } from "../models/vehicle";
+import { Vehicle } from "../deliveryClient/models/vehicle";
 import {
   Box,
   Container,
@@ -10,9 +10,9 @@ import {
   SimpleGrid,
   Stack,
 } from "@chakra-ui/react";
-import { Gallery } from "../models/gallery";
+import { Gallery } from "../deliveryClient/models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
-import { catchEmAllStatic } from "../components/catchEmAllStatic";
+import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;

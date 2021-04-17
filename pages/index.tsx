@@ -1,6 +1,6 @@
 import { ContentHead } from "../components/contentHead";
 import { Center, Container, Stack, useBreakpointValue } from "@chakra-ui/react";
-import { Action } from "../models/action";
+import { Action } from "../deliveryClient/models/action";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { InferGetServerSidePropsType, NextPage } from "next";
 import { ActionDots } from "../components/index/actionDots";
@@ -8,7 +8,7 @@ import { ActionItem } from "../components/index/actionItem";
 import { useRotate } from "../components/index/useRotate";
 import { convertBackgroundColor } from "../components/index/utils";
 import { RemainingSlider } from "../components/index/remainingSlider";
-import { catchEmAllStatic } from "../components/catchEmAllStatic";
+import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { Custom404 } from "../components/custom404";
 
 export const getStaticProps = catchEmAllStatic(async () => {

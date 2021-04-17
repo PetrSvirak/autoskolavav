@@ -1,6 +1,6 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
-import { Layout } from "../components/layout";
+import { Layout } from "../components/layout/layout";
 
 const theme = extendTheme({
   colors: {

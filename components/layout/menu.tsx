@@ -1,11 +1,19 @@
-import React from "react";
+import { FunctionComponent, useRef } from "react";
 import {
-  Box,
+  Button,
   Heading,
   Link,
   ListItem,
   Stack,
   UnorderedList,
+  useBreakpointValue,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -64,8 +72,66 @@ const OurLink = ({ href = "", text }) => {
   );
 };
 
-export function Menu(props) {
+const DrawerWrapper: FunctionComponent<{
+  children: (onClose: () => void) => JSX.Element;
+}> = ({ children }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+
   return (
+    <Stack padding={4}>
+      <Button ref={btnRef} w="100%" onClick={onOpen}>
+        Navigace
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement="top"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Navigace</DrawerHeader>
+            <DrawerBody>{children(onClose)}</DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    </Stack>
+  );
+};
+
+export const Menu = () => {
+  const shouldShowAsMenu = useBreakpointValue({ base: true, md: false });
+
+  return shouldShowAsMenu ? (
+    <Stack padding={4}>
+      <DrawerWrapper>
+        {(onClose) => (
+          <>
+            {routes.map(({ groupName, items }) => (
+              <Stack key={groupName}>
+                <Heading as="h4" size="md">
+                  {groupName}
+                </Heading>
+                <UnorderedList
+                  role="navigation"
+                  listStyleType="none"
+                  spacing={1}
+                >
+                  {items.map(({ href, name }) => (
+                    <ListItem key={href} onClick={onClose}>
+                      <OurLink href={href} text={name} />
+                    </ListItem>
+                  ))}
+                </UnorderedList>
+              </Stack>
+            ))}
+          </>
+        )}
+      </DrawerWrapper>
+    </Stack>
+  ) : (
     <Stack borderWidth={1} padding={4} rounded="md" spacing={4}>
       {routes.map(({ groupName, items }) => (
         <Stack key={groupName}>
@@ -83,4 +149,4 @@ export function Menu(props) {
       ))}
     </Stack>
   );
-}
+};

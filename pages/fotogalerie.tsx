@@ -1,5 +1,5 @@
 import { ContentHead } from "../components/contentHead";
-import { InferGetServerSidePropsType, NextPage } from "next";
+import { InferGetStaticPropsType, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../deliveryClient/models/vehicle";
 import {
@@ -79,7 +79,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
 });
 
 const PhotoGallery: NextPage<
-  InferGetServerSidePropsType<typeof getStaticProps>
+  InferGetStaticPropsType<typeof getStaticProps>
 > = ({ photosByType }) => (
   <Container>
     <ContentHead pageName="Fotogalerie" />

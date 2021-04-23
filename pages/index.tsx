@@ -2,7 +2,7 @@ import { ContentHead } from "../components/contentHead";
 import { Center, Container, Stack, useBreakpointValue } from "@chakra-ui/react";
 import { Action } from "../deliveryClient/models/action";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
-import { InferGetServerSidePropsType, NextPage } from "next";
+import { InferGetStaticPropsType, NextPage } from "next";
 import { ActionDots } from "../components/index/actionDots";
 import { ActionItem } from "../components/index/actionItem";
 import { useRotate } from "../components/index/useRotate";
@@ -35,7 +35,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
 const FlipIntervalMs = 5000;
 const TickIntervalMs = 100;
 
-const Index: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
+const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   actions,
 }) => {
   const hasMultipleActions = actions.length > 1;

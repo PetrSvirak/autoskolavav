@@ -9,7 +9,7 @@ export class PriceList extends ContentItem {
   public testsTitle: Elements.TextElement;
   public workshopsTitle: Elements.TextElement;
   public anotherRidesTitle: Elements.TextElement;
-  public untitledRichText: Elements.RichTextElement;
+  public tests: Elements.RichTextElement;
   public workshopType: Elements.MultipleChoiceElement;
   constructor() {
     super({
@@ -26,8 +26,8 @@ export class PriceList extends ContentItem {
         if (elementName === "another_rides_title") {
           return "anotherRidesTitle";
         }
-        if (elementName === "untitled_rich_text") {
-          return "untitledRichText";
+        if (elementName === "tests") {
+          return "tests";
         }
         if (elementName === "workshop_type") {
           return "workshopType";

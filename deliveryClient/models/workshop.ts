@@ -7,19 +7,19 @@ import { ContentItem, Elements } from "@kentico/kontent-delivery";
 export class Workshop extends ContentItem {
   public name: Elements.TextElement;
   public numberOfHours: Elements.NumberElement;
-  public untitledMultipleChoice: Elements.MultipleChoiceElement;
-  public untitledRichText: Elements.RichTextElement;
+  public type: Elements.MultipleChoiceElement;
+  public price: Elements.RichTextElement;
   constructor() {
     super({
       propertyResolver: (elementName: string) => {
         if (elementName === "number_of_hours") {
           return "numberOfHours";
         }
-        if (elementName === "untitled_multiple_choice") {
-          return "untitledMultipleChoice";
+        if (elementName === "type") {
+          return "type";
         }
-        if (elementName === "untitled_rich_text") {
-          return "untitledRichText";
+        if (elementName === "price") {
+          return "price";
         }
         return elementName;
       },

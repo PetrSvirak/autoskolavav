@@ -1,28 +1,30 @@
-import { Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
+import { Td, Text, Tr } from "@chakra-ui/react";
 import { formatDate } from "./utils";
 import { FunctionComponent } from "react";
+import { createTable, TableHeaderItem } from "../Table";
+
+const Table = createTable<CourseDateType>();
+
+const headerItems: TableHeaderItem[] = [
+  { name: "Datum", isNumeric: true },
+  { name: "Volná místa" },
+];
 
 export const DatesTable: FunctionComponent<{ dates: CourseDateType[] }> = ({
   dates,
 }) => (
-  <Table size="sm" variant="striped">
-    <Thead>
+  <Table
+    headerItems={headerItems}
+    rows={dates}
+    renderRow={({ date, freePlaces }) => (
       <Tr>
-        <Th isNumeric>Datum</Th>
-        <Th>Volná místa</Th>
+        <Td isNumeric>
+          {formatDate(new Date(Date.parse(date.replace("Z", ""))))}
+        </Td>
+        <Td>
+          <Text color={freePlaces > 0 ? "green" : "red"}>{freePlaces}</Text>
+        </Td>
       </Tr>
-    </Thead>
-    <Tbody>
-      {dates.map(({ date, freePlaces }) => (
-        <Tr key={date}>
-          <Td isNumeric>
-            {formatDate(new Date(Date.parse(date.replace("Z", ""))))}
-          </Td>
-          <Td>
-            <Text color={freePlaces > 0 ? "green" : "red"}>{freePlaces}</Text>
-          </Td>
-        </Tr>
-      ))}
-    </Tbody>
-  </Table>
+    )}
+  />
 );

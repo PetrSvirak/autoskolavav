@@ -15,7 +15,7 @@ import {
 import { Gallery } from "../deliveryClient/models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
-import { ModalWindow } from "./Modal";
+import { ModalWindow } from "../components/Modal";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;

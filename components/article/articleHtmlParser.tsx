@@ -15,7 +15,7 @@ type RichTextHtmlParserProps = {
 };
 
 const parseText = (text) =>
-  text.content.replaceAll("&nbsp;", " ").replaceAll("&amp;", "&");
+  text.content.replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
 
 const parseElement = (element, index) => {
   switch (element.tagName) {

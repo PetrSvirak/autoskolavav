@@ -71,7 +71,7 @@ const parseElement = (element, index) => {
       );
     case "ol":
       return (
-        <OrderedList key={index}>
+        <OrderedList key={index} listStylePosition="inside">
           {element.children.map((node, index) => parseNode(node, index))}
         </OrderedList>
       );
@@ -83,7 +83,7 @@ const parseElement = (element, index) => {
       );
     case "ul":
       return (
-        <UnorderedList key={index}>
+        <UnorderedList key={index} listStylePosition="inside">
           {element.children.map((node, index) => parseNode(node, index))}
         </UnorderedList>
       );

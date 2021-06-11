@@ -41,7 +41,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
 });
 
 const getFileExtension = (src: string) =>
-  src.split(/^.*\.(docx|DOCX|doc|DOC|pdf|PDF)$/)[1].toUpperCase();
+  src.toUpperCase().split(/^.*\.(DOCX|DOC|PDF)$/)[1];
 
 const renderForms = (forms: Form[]) => (
   <Stack spacing={3}>

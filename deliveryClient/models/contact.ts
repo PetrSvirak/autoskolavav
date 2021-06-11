@@ -14,6 +14,8 @@ export class Contact extends ContentItem {
   public streetNumber: Elements.NumberElement;
   public street: Elements.TextElement;
   public officeHours: Elements.TextElement;
+  public map: Elements.AssetsElement;
+  public mapLink: Elements.TextElement;
   constructor() {
     super({
       propertyResolver: (elementName: string) => {
@@ -34,6 +36,12 @@ export class Contact extends ContentItem {
         }
         if (elementName === "office_hours") {
           return "officeHours";
+        }
+        if (elementName === "map") {
+          return "map";
+        }
+        if (elementName === "map_link") {
+          return "mapLink";
         }
         return elementName;
       },

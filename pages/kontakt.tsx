@@ -1,11 +1,12 @@
 import { NextPage } from "next";
-import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Container, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Contact as ContactModel } from "../deliveryClient/models/contact";
 import { PhoneNumber as PhoneNumberModel } from "../deliveryClient/models/phone_number";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
 import { ContentHead } from "../components/contentHead";
+import React from "react";
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const contactItem = await deliveryClient
@@ -28,6 +29,8 @@ export const getStaticProps = catchEmAllStatic(async () => {
       eMail: contactItem.item.eMail.value,
       officeHours: contactItem.item.officeHours.value,
       officeHoursNote: contactItem.item.officeHoursNote.value,
+      mapAssetLink: contactItem.item.map.value[0].url,
+      mapLink: contactItem.item.mapLink.value,
     },
   };
 });
@@ -53,6 +56,8 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   eMail,
   officeHours,
   officeHoursNote,
+  mapAssetLink,
+  mapLink,
 }) => (
   <Container>
     <ContentHead pageName="Kontakt" />
@@ -90,6 +95,19 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
         </Heading>
         <Text>{officeHours}</Text>
         {renderNote(officeHoursNote)}
+      </Box>
+      <Box>
+        <Heading as="h2" size="sm">
+          Mapa:
+        </Heading>
+        <a href={mapLink} target="_blank">
+          <Image
+            boxSize="100%"
+            src={mapAssetLink}
+            objectFit="cover"
+            sizes="(max-width: 767px) 600px, 232px"
+          />
+        </a>
       </Box>
     </Stack>
   </Container>

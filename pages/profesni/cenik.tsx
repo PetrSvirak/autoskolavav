@@ -6,14 +6,12 @@ import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 import { PriceList as PriceListModel } from "../../deliveryClient/models/price_list";
 import { Workshop as WorkshopModel } from "../../deliveryClient/models/workshop";
 import { ContentHead } from "../../components/contentHead";
-import { Price as PriceModel } from "../../deliveryClient/models/price";
-import {
-  Price,
-  Workshop,
-  WorkshopsTable,
-} from "../../components/classicPriceList/WorkshopsTable";
+import { WorkshopsTable } from "../../components/classicPriceList/WorkshopsTable";
 import { Vehicle } from "../../deliveryClient/models/vehicle";
-import { createWorkshopsVehiclesMap } from "../../utilities/priceListUtils";
+import {
+  createWorkshopsVehiclesMap,
+  getWorkshops,
+} from "../../utilities/priceListUtils";
 import { TableHeaderItem } from "../../components/Table";
 
 export const getStaticProps = catchEmAllStatic(async () => {
@@ -34,26 +32,12 @@ export const getStaticProps = catchEmAllStatic(async () => {
 
   const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.items);
 
-  const workshops = professionalWorkshops.items
-    .map(
-      (workshop): Workshop => {
-        const prices = workshop.price.linkedItemCodenames
-          .map((c) => professionalWorkshops.linkedItems[c] as PriceModel)
-          .map(
-            (price): Price => ({
-              price: price.price.value,
-              note: price.note.value,
-            })
-          );
-        return {
-          name:
-            workshop.name.value + " " + workshop.numberOfHours.value + " hodin",
-          prices,
-          vehicles: workshopsVehiclesMap.get(workshop.system.id) || null,
-        };
-      }
-    )
-    .filter((x) => x !== undefined);
+  const workshops = getWorkshops(
+    professionalWorkshops,
+    workshopsVehiclesMap,
+    (workshop) =>
+      workshop.name.value + " " + workshop.numberOfHours.value + " hodin"
+  );
 
   return {
     props: {
@@ -63,7 +47,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
   };
 });
 
-const headerItems: TableHeaderItem[] = [
+const workshopsHeaderItems: TableHeaderItem[] = [
   { name: "Druh kurzu" },
   { name: "Cena" },
   { name: "Vozidlo" },
@@ -73,13 +57,13 @@ const ProfessionalPriceList: NextPage<
   InferCreatorStaticPropsType<typeof getStaticProps>
 > = ({ workshopsTitle, workshops }) => (
   <Container>
-    <ContentHead pageName="Ceník" />
+    <ContentHead pageName="Ceník profesních kurzů" />
     <Stack spacing={8}>
       <Heading as="h1" size="lg">
-        Ceník
+        Ceník profesních kurzů
       </Heading>
       <WorkshopsTable
-        headerItems={headerItems}
+        headerItems={workshopsHeaderItems}
         title={workshopsTitle}
         workshops={workshops}
       />

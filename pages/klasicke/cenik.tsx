@@ -7,19 +7,17 @@ import { PriceList as PriceListModel } from "../../deliveryClient/models/price_l
 import { Workshop as WorkshopModel } from "../../deliveryClient/models/workshop";
 import { ContentHead } from "../../components/contentHead";
 import { Test as TestModel } from "../../deliveryClient/models/test";
-import { Price as PriceModel } from "../../deliveryClient/models/price";
-import {
-  Price,
-  Workshop,
-  WorkshopsTable,
-} from "../../components/classicPriceList/WorkshopsTable";
+import { WorkshopsTable } from "../../components/classicPriceList/WorkshopsTable";
 import {
   VehicleRidePrice,
   RidesTable,
 } from "../../components/classicPriceList/RidesTable";
 import { Test, TestsTable } from "../../components/classicPriceList/TestsTable";
 import { Vehicle } from "../../deliveryClient/models/vehicle";
-import { createWorkshopsVehiclesMap } from "../../utilities/priceListUtils";
+import {
+  createWorkshopsVehiclesMap,
+  getWorkshops,
+} from "../../utilities/priceListUtils";
 import { TableHeaderItem } from "../../components/Table";
 
 export const getStaticProps = catchEmAllStatic(async () => {
@@ -40,25 +38,11 @@ export const getStaticProps = catchEmAllStatic(async () => {
 
   const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.items);
 
-  const workshops = classicWorkshops.items
-    .map(
-      (workshop): Workshop => {
-        const prices = workshop.price.linkedItemCodenames
-          .map((c) => classicWorkshops.linkedItems[c] as PriceModel)
-          .map(
-            (price): Price => ({
-              price: price.price.value,
-              note: price.note.value,
-            })
-          );
-        return {
-          name: workshop.name.value,
-          prices,
-          vehicles: workshopsVehiclesMap.get(workshop.system.id),
-        };
-      }
-    )
-    .filter((x) => x !== undefined);
+  const workshops = getWorkshops(
+    classicWorkshops,
+    workshopsVehiclesMap,
+    (workshop) => workshop.name.value
+  );
 
   const vehiclesWithPrice = allVehicles.items
     .filter((vehicle) => vehicle.priceFor90Minutes.value !== null)
@@ -94,7 +78,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
   };
 });
 
-const headerItems: TableHeaderItem[] = [
+const workshopsHeaderItems: TableHeaderItem[] = [
   { name: "Skupina" },
   { name: "Cena" },
   { name: "Vozidlo" },
@@ -112,13 +96,13 @@ const ClassicPriceList: NextPage<
   vehiclesWithPrice,
 }) => (
   <Container>
-    <ContentHead pageName="Ceník" />
+    <ContentHead pageName="Ceník klasických kurzů" />
     <Stack spacing={8}>
       <Heading as="h1" size="lg">
-        Ceník
+        Ceník klasických kurzů
       </Heading>
       <WorkshopsTable
-        headerItems={headerItems}
+        headerItems={workshopsHeaderItems}
         title={workshopsTitle}
         workshops={workshops}
       />

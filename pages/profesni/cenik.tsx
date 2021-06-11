@@ -56,7 +56,7 @@ const workshopsHeaderItems: TableHeaderItem[] = [
 const ProfessionalPriceList: NextPage<
   InferCreatorStaticPropsType<typeof getStaticProps>
 > = ({ workshopsTitle, workshops }) => (
-  <Container>
+  <Container padding="4">
     <ContentHead pageName="Ceník profesních kurzů" />
     <Stack spacing={8}>
       <Heading as="h1" size="lg">

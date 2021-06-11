@@ -99,7 +99,7 @@ const PhotoGallery: NextPage<
       <ModalWindow isOpened={selectedSrc && isOpen} onClose={close}>
         <Image src={`${selectedSrc}?w=1200&h=800`} />
       </ModalWindow>
-      <Container>
+      <Container padding="4">
         <ContentHead pageName="Fotogalerie" />
         <Stack>
           <Heading as="h1" size="lg">

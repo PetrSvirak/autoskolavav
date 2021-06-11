@@ -50,7 +50,7 @@ export const createGetCourseStartDatesProps = (
 export const CourseStartDates: NextPage<
   InferCreatorStaticPropsType<typeof createGetCourseStartDatesProps>
 > = ({ courseGroups, pageName }) => (
-  <Container>
+  <Container padding="4">
     <Stack spacing={6}>
       <ContentHead pageName={pageName} />
       <Heading as="h1" size="lg">

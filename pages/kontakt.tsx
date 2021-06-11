@@ -59,7 +59,7 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   mapAssetLink,
   mapLink,
 }) => (
-  <Container>
+  <Container padding="4">
     <ContentHead pageName="Kontakt" />
     <Heading as="h1" size="lg">
       Kontakt

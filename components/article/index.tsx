@@ -29,7 +29,7 @@ export const createGetArticleProps = (codename: string, pageName: string) =>
 export const Article: NextPage<
   InferCreatorStaticPropsType<typeof createGetArticleProps>
 > = ({ articleHtml, pageName }) => (
-  <Container>
+  <Container padding="4">
     <ContentHead pageName={pageName} />
     <Stack>
       <Heading as="h1" size="lg">

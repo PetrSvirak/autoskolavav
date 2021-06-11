@@ -95,7 +95,7 @@ const ClassicPriceList: NextPage<
   priceForDowntime,
   vehiclesWithPrice,
 }) => (
-  <Container>
+  <Container padding="4">
     <ContentHead pageName="Ceník klasických kurzů" />
     <Stack spacing={8}>
       <Heading as="h1" size="lg">

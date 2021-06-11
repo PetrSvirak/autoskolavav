@@ -70,7 +70,7 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   ordinaryDriversForms,
   professionalDriversForms,
 }) => (
-  <Container>
+  <Container padding="4">
     <ContentHead pageName="Formuláře" />
     <Heading as="h1" size="lg">
       Formuláře

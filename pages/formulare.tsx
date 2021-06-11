@@ -1,5 +1,13 @@
 import { NextPage } from "next";
-import { Box, Container, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Heading,
+  Link,
+  ListItem,
+  Stack,
+  UnorderedList,
+} from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Forms as FormsModel } from "../deliveryClient/models/forms";
 import { Form as FormModel } from "../deliveryClient/models/form";
@@ -44,18 +52,18 @@ const getFileExtension = (src: string) =>
   src.toUpperCase().split(/^.*\.(DOCX|DOC|PDF)$/)[1];
 
 const renderForms = (forms: Form[]) => (
-  <Stack spacing={3}>
+  <UnorderedList spacing={3} listStylePosition="inside">
     {forms.map((form, index) => (
-      <Text key={index}>
+      <ListItem key={index}>
         {form.text}
         {form.src.map((s, index) => (
           <>
              <Link href={s}>[{getFileExtension(s)}]</Link>
           </>
         ))}
-      </Text>
+      </ListItem>
     ))}
-  </Stack>
+  </UnorderedList>
 );
 
 const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({

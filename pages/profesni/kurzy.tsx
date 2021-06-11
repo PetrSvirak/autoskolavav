@@ -4,5 +4,5 @@ export default Article;
 
 export const getStaticProps = createGetArticleProps(
   "professional_courses",
-  "Kurzy"
+  "Profesní kurzy"
 );

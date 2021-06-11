@@ -10,7 +10,8 @@ import { CourseGroup } from "./courseGroup";
 import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 
 export const createGetCourseStartDatesProps = (
-  type: "professional_terms" | "classic_terms"
+  type: "professional_terms" | "classic_terms",
+  pageName: string
 ) =>
   catchEmAllStatic(async () => {
     const termsPage = await deliveryClient.item<TermsPage>(type).toPromise();
@@ -41,18 +42,19 @@ export const createGetCourseStartDatesProps = (
     return {
       props: {
         courseGroups,
+        pageName,
       },
     };
   });
 
 export const CourseStartDates: NextPage<
   InferCreatorStaticPropsType<typeof createGetCourseStartDatesProps>
-> = ({ courseGroups }) => (
+> = ({ courseGroups, pageName }) => (
   <Container>
     <Stack spacing={6}>
-      <ContentHead pageName="Termíny" />
+      <ContentHead pageName={pageName} />
       <Heading as="h1" size="lg">
-        Termíny
+        {pageName}
       </Heading>
       <Stack spacing={8}>
         {courseGroups.map((courseGroup) => (

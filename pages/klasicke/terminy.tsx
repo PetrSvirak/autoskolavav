@@ -5,4 +5,7 @@ import {
 
 export default CourseStartDates;
 
-export const getStaticProps = createGetCourseStartDatesProps("classic_terms");
+export const getStaticProps = createGetCourseStartDatesProps(
+  "classic_terms",
+  "Termíny klasických kurzů"
+);

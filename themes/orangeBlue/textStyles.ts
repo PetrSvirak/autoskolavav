@@ -20,6 +20,7 @@ export const textStyles = {
     fontWeight: "bold-text",
     fontSize: "20px",
     textColor: "complement-primary",
+    textAlign: "left",
   },
   "logo-head": {
     fontFamily: "DM Serif Display, serif",

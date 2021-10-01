@@ -16,4 +16,11 @@ export const orangeBlueTheme = extendTheme({
   sizes,
   textStyles,
   breakpoints,
+  styles: {
+    global: {
+      "html, body, #__next": {
+        height: "100%"
+      },
+    },
+  },
 });

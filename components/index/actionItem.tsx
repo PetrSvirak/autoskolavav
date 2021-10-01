@@ -1,24 +1,27 @@
 import { FunctionComponent, MouseEventHandler } from "react";
-import { Center, Heading, Stack, Text } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Button, ButtonType } from "../Button";
 
 type ActionItemProps = {
   readonly action: ActionViewType;
   readonly onMouseEnter: MouseEventHandler;
   readonly onMouseLeave: MouseEventHandler;
-  readonly renderSlider?: () => JSX.Element;
+  readonly renderDots?: () => JSX.Element;
+  readonly renderSlider?: () => JSX.Element
 };
 
 export const ActionItem: FunctionComponent<ActionItemProps> = ({
   action,
   onMouseEnter,
   onMouseLeave,
+  renderDots,
   renderSlider,
 }) => (
   <Stack
-    bg={action.backgroundColor}
-    borderWidth={1}
+    bg="secondary"
     flex="1"
-    h="300px"
+    h="min-content"
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     overflowY="clip"
@@ -27,20 +30,18 @@ export const ActionItem: FunctionComponent<ActionItemProps> = ({
     spacing={4}
     textAlign="center"
     w="400px"
+    maxW="400px"
+    alignContent="center"
   >
-    <Heading as="h2" size="lg">
-      {action.title}
-    </Heading>
-
-    <Center h="100%" w="100%">
-      <Stack spacing={4}>
-        <Heading as="h3" size="md">
-          {action.subtitle}
-        </Heading>
-        <Text>{action.note}</Text>
-      </Stack>
-    </Center>
-
+    <Stack spacing={4}>
+      <Text textStyle="discounts">{action.title}</Text>
+      <Text textStyle="discounts">{action.subtitle}</Text>
+      <Text textStyle="discounts">{action.note}</Text>
+      <Button type={ButtonType.Primary}>
+        <NextLink href={action.moreInfoLink}>VÍCE INFORMACÍ</NextLink>
+      </Button>
+    </Stack>
     {renderSlider?.()}
+    {renderDots?.()}
   </Stack>
 );

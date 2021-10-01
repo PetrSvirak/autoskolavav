@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Center, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { StackDirection } from "@chakra-ui/layout/dist/types/stack.utils";
 import { SystemProps } from "@chakra-ui/system";
 
@@ -20,19 +20,25 @@ export const ActionDots: FunctionComponent<ActiveDotsProp> = ({
   spacing,
   totalActions,
 }) => (
-  <RadioGroup value={activeIndex}>
-    <Stack direction={direction} overflow="hidden" spacing={spacing}>
-      {new Array(totalActions).fill(null, 0, totalActions).map((_, index) => (
-        <Radio
-          _focus={{
-            boxShadow: "none",
-          }}
-          key={index}
-          onMouseEnter={onDotEnter(index)}
-          onMouseLeave={onDotLeave}
-          value={index}
-        />
-      ))}
-    </Stack>
-  </RadioGroup>
+  <Center>
+    <RadioGroup value={activeIndex}>
+      <Stack direction={direction} overflow="hidden" spacing={spacing}>
+        {new Array(totalActions).fill(null, 0, totalActions).map((_, index) => (
+          <Radio
+            _focus={{
+              boxShadow: "none",
+            }}
+            _checked={{
+              background: "white",
+              borderColor: "white",
+            }}
+            key={index}
+            onMouseEnter={onDotEnter(index)}
+            onMouseLeave={onDotLeave}
+            value={index}
+          />
+        ))}
+      </Stack>
+    </RadioGroup>
+  </Center>
 );

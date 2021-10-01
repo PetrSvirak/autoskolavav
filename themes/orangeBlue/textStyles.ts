@@ -19,7 +19,8 @@ export const textStyles = {
     fontFamily: "Open Sans, sans-serif",
     fontWeight: "bold-text",
     fontSize: "20px",
-    textColor: "complement-primary",
+    textColor: "complement-secondary",
+    textAlign: "left",
   },
   "logo-head": {
     fontFamily: "DM Serif Display, serif",

@@ -5,5 +5,17 @@ import { ContentItem, Elements } from "@kentico/kontent-delivery";
  * Tip: You can replace 'ContentItem' with another generated class to fully leverage strong typing.
  */
 export class Link extends ContentItem {
-  public odkaz: Elements.TextElement;
+  public link: Elements.TextElement;
+  public urlSlug: Elements.TextElement;
+
+  constructor() {
+    super({
+      propertyResolver: (elementName: string) => {
+        if (elementName === "url_slug") {
+          return "urlSlug";
+        }
+        return elementName;
+      },
+    });
+  }
 }

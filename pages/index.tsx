@@ -1,15 +1,34 @@
 import { ContentHead } from "../components/contentHead";
-import { Center, Container, Stack, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { Action } from "../deliveryClient/models/action";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { InferGetStaticPropsType, NextPage } from "next";
-import { ActionDots } from "../components/index/actionDots";
-import { ActionItem } from "../components/index/actionItem";
-import { useRotate } from "../components/index/useRotate";
-import { convertBackgroundColor } from "../components/index/utils";
-import { RemainingSlider } from "../components/index/remainingSlider";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
-import { Custom404 } from "../components/custom404";
+import { Actions } from "../components/index/actions";
+import { News } from "../components/index/news";
+import { Link } from "../deliveryClient/models/link";
+import { IContentItemsContainer } from "@kentico/kontent-delivery";
+import { HomepagePhoto } from "../deliveryClient/models/homepage_photo";
+
+const mapActionToActionViewType = (linkedItems: IContentItemsContainer) => (
+  action: Action
+): ActionViewType => ({
+  note: action.note.value,
+  subtitle: action.subtitle.value,
+  title: action.title.value,
+  moreInfoLink: action.moreInfoLink?.linkedItemCodenames.map((c) => {
+    const link = linkedItems[c] as Link;
+    if (link) {
+      return link.link.value;
+    }
+  })[0],
+});
+
+const mapActionToNewsViewType = (action: Action): NewsViewType => ({
+  note: action.note.value,
+  subtitle: action.subtitle.value,
+  title: action.title.value,
+});
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const actionsResult = await deliveryClient
@@ -18,72 +37,48 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .orderByDescending("system.last_modified")
     .toPromise();
 
-  const actions = actionsResult?.items.map<ActionViewType>((action) => ({
-    backgroundColor: convertBackgroundColor(action),
-    note: action.note.value,
-    subtitle: action.subtitle.value,
-    title: action.title.value,
-  }));
+  const homepagePhoto = await deliveryClient
+    .item<HomepagePhoto>("uvodni_foto")
+    .toPromise();
+
+  const actions = actionsResult?.items
+    .filter((action) => action.type.value[0]?.codename === "important")
+    .map<ActionViewType>(mapActionToActionViewType(actionsResult.linkedItems));
+
+  const news = actionsResult?.items
+    .filter((action) => action.type.value[0]?.codename === "informational")
+    .map<NewsViewType>(mapActionToNewsViewType);
 
   return {
     props: {
       actions,
+      news,
+      homepagePhotoUrl: homepagePhoto.item.photo.value[0].url,
     },
   };
 });
 
-const FlipIntervalMs = 5000;
-const TickIntervalMs = 100;
-
 const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   actions,
-}) => {
-  const hasMultipleActions = actions.length > 1;
-  const areDotsBelow = useBreakpointValue({ base: false, md: true });
-  const { activeIndex, passedMs, pauseRotationAt, resumeRotation } = useRotate(
-    actions.length,
-    FlipIntervalMs,
-    TickIntervalMs
-  );
-
-  if (!actions.length) {
-    return <Custom404 />;
-  }
-
-  const dots = hasMultipleActions && (
-    <ActionDots
-      activeIndex={activeIndex}
-      direction={{ base: "column", md: "row" }}
-      onDotEnter={pauseRotationAt}
-      onDotLeave={resumeRotation}
-      spacing={{ base: 2, md: 8 }}
-      totalActions={actions.length}
-    />
-  );
-
-  return (
-    <Container padding="4">
-      <ContentHead pageName="Akční nabídka" />
-      <Center>
-        <Stack spacing={4} direction={{ base: "row", md: "column" }}>
-          {!areDotsBelow && dots}
-
-          <ActionItem
-            action={actions[activeIndex]}
-            onMouseEnter={pauseRotationAt(activeIndex)}
-            onMouseLeave={resumeRotation}
-            renderSlider={() =>
-              hasMultipleActions && (
-                <RemainingSlider passedMs={passedMs} totalMs={FlipIntervalMs} />
-              )
-            }
-          />
-
-          {areDotsBelow && dots}
-        </Stack>
-      </Center>
-    </Container>
-  );
-};
+  news,
+  homepagePhotoUrl,
+}) => (
+  <Box
+    py={10}
+    px="10%"
+    bgImage={`url('${homepagePhotoUrl}')`}
+    bgPosition="center"
+    bgRepeat="no-repeat"
+    bgSize="cover"
+    h="full"
+    w="full"
+  >
+    <ContentHead pageName="Akční nabídka" />
+    <Stack spacing={12} direction={{ base: "column", md: "column" }}>
+      <Actions actions={actions} />
+      <News news={news} />
+    </Stack>
+  </Box>
+);
 
 export default Index;

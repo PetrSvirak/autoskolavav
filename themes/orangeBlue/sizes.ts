@@ -1,4 +1,4 @@
 export const sizes = {
-  site: "1600px",
+  site: "1200px",
   "space-menu": "70px",
 };

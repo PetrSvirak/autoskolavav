@@ -1,11 +1,9 @@
 import { NextPage } from "next";
-import { Container, Heading, Stack } from "@chakra-ui/react";
 import { deliveryClient } from "../../deliveryClient/deliveryClient";
 import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
 import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 import { PriceList as PriceListModel } from "../../deliveryClient/models/price_list";
 import { Workshop as WorkshopModel } from "../../deliveryClient/models/workshop";
-import { ContentHead } from "../../components/contentHead";
 import { WorkshopsTable } from "../../components/classicPriceList/WorkshopsTable";
 import { Vehicle } from "../../deliveryClient/models/vehicle";
 import {
@@ -13,6 +11,7 @@ import {
   getWorkshops,
 } from "../../utilities/priceListUtils";
 import { TableHeaderItem } from "../../components/Table";
+import { StackedContentWithHeading } from "../../components/layout/stackedContentWithHeading";
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const priceList = await deliveryClient
@@ -56,19 +55,13 @@ const workshopsHeaderItems: TableHeaderItem[] = [
 const ProfessionalPriceList: NextPage<
   InferCreatorStaticPropsType<typeof getStaticProps>
 > = ({ workshopsTitle, workshops }) => (
-  <Container padding="4">
-    <ContentHead pageName="Ceník profesních kurzů" />
-    <Stack spacing={8}>
-      <Heading as="h1" size="lg">
-        Ceník profesních kurzů
-      </Heading>
-      <WorkshopsTable
-        headerItems={workshopsHeaderItems}
-        title={workshopsTitle}
-        workshops={workshops}
-      />
-    </Stack>
-  </Container>
+  <StackedContentWithHeading pageName="Ceník profesních kurzů">
+    <WorkshopsTable
+      headerItems={workshopsHeaderItems}
+      title={workshopsTitle}
+      workshops={workshops}
+    />
+  </StackedContentWithHeading>
 );
 
 export default ProfessionalPriceList;

@@ -1,19 +1,11 @@
 import { NextPage } from "next";
-import {
-  Box,
-  Container,
-  Heading,
-  Link,
-  ListItem,
-  Stack,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { Box, Heading, Link, ListItem, UnorderedList } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Forms as FormsModel } from "../deliveryClient/models/forms";
 import { Form as FormModel } from "../deliveryClient/models/form";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
-import { ContentHead } from "../components/contentHead";
+import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
 
 type Form = {
   readonly text: string;
@@ -70,26 +62,20 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   ordinaryDriversForms,
   professionalDriversForms,
 }) => (
-  <Container padding="4">
-    <ContentHead pageName="Formuláře" />
-    <Heading as="h1" size="lg">
-      Formuláře
-    </Heading>
-    <Stack spacing={8} mt={4}>
-      <Box>
-        <Heading as="h2" size="sm">
-          Běžní řidiči:
-        </Heading>
-        {renderForms(ordinaryDriversForms)}
-      </Box>
-      <Box>
-        <Heading as="h2" size="sm">
-          Profesionální řidiči:
-        </Heading>
-        {renderForms(professionalDriversForms)}
-      </Box>
-    </Stack>
-  </Container>
+  <StackedContentWithHeading pageName="Formuláře">
+    <Box>
+      <Heading as="h2" size="sm">
+        Běžní řidiči:
+      </Heading>
+      {renderForms(ordinaryDriversForms)}
+    </Box>
+    <Box>
+      <Heading as="h2" size="sm">
+        Profesionální řidiči:
+      </Heading>
+      {renderForms(professionalDriversForms)}
+    </Box>
+  </StackedContentWithHeading>
 );
 
 export default Forms;

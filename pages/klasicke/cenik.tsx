@@ -1,11 +1,9 @@
 import { NextPage } from "next";
-import { Container, Heading, Stack } from "@chakra-ui/react";
 import { deliveryClient } from "../../deliveryClient/deliveryClient";
 import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
 import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
 import { PriceList as PriceListModel } from "../../deliveryClient/models/price_list";
 import { Workshop as WorkshopModel } from "../../deliveryClient/models/workshop";
-import { ContentHead } from "../../components/contentHead";
 import { Test as TestModel } from "../../deliveryClient/models/test";
 import { WorkshopsTable } from "../../components/classicPriceList/WorkshopsTable";
 import {
@@ -19,6 +17,7 @@ import {
   getWorkshops,
 } from "../../utilities/priceListUtils";
 import { TableHeaderItem } from "../../components/Table";
+import { StackedContentWithHeading } from "../../components/layout/stackedContentWithHeading";
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const priceList = await deliveryClient
@@ -95,25 +94,19 @@ const ClassicPriceList: NextPage<
   priceForDowntime,
   vehiclesWithPrice,
 }) => (
-  <Container padding="4">
-    <ContentHead pageName="Ceník klasických kurzů" />
-    <Stack spacing={8}>
-      <Heading as="h1" size="lg">
-        Ceník klasických kurzů
-      </Heading>
-      <WorkshopsTable
-        headerItems={workshopsHeaderItems}
-        title={workshopsTitle}
-        workshops={workshops}
-      />
-      <RidesTable
-        title={anotherRidesTitle}
-        rides={vehiclesWithPrice}
-        priceForDowntime={priceForDowntime}
-      />
-      <TestsTable title={testsTitle} tests={tests} />
-    </Stack>
-  </Container>
+  <StackedContentWithHeading pageName="Ceník klasických kurzů">
+    <WorkshopsTable
+      headerItems={workshopsHeaderItems}
+      title={workshopsTitle}
+      workshops={workshops}
+    />
+    <RidesTable
+      title={anotherRidesTitle}
+      rides={vehiclesWithPrice}
+      priceForDowntime={priceForDowntime}
+    />
+    <TestsTable title={testsTitle} tests={tests} />
+  </StackedContentWithHeading>
 );
 
 export default ClassicPriceList;

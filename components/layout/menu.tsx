@@ -1,28 +1,26 @@
 import { FunctionComponent, useRef } from "react";
 import {
   Button,
+  Container,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Heading,
-  Link,
   ListItem,
   Stack,
   UnorderedList,
   useBreakpointValue,
   useDisclosure,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
+import { Link, LinkType } from "../Link";
 
 const routes = [
   {
     groupName: "Informace",
     items: [
-      { name: "Akční nabídka", href: "/" },
       { name: "Fotogalerie", href: "/fotogalerie" },
       { name: "Kontakt", href: "/kontakt" },
       { name: "Formuláře", href: "/formulare" },
@@ -48,30 +46,6 @@ const routes = [
   },
 ];
 
-const activeStyle = {
-  background: "orange.500",
-  color: "white",
-};
-const hoverStyle = activeStyle;
-
-const OurLink = ({ href = "", text }) => {
-  const { pathname } = useRouter();
-  return (
-    <NextLink href={href} passHref>
-      <Link
-        {...(pathname === href ? activeStyle : {})}
-        _hover={hoverStyle}
-        display="block"
-        paddingX={2}
-        paddingY={1}
-        rounded="md"
-      >
-        {text}
-      </Link>
-    </NextLink>
-  );
-};
-
 const DrawerWrapper: FunctionComponent<{
   children: (onClose: () => void) => JSX.Element;
 }> = ({ children }) => {
@@ -79,7 +53,7 @@ const DrawerWrapper: FunctionComponent<{
   const btnRef = useRef();
 
   return (
-    <Stack padding={4}>
+    <Stack>
       <Button ref={btnRef} w="100%" onClick={onOpen}>
         Navigace
       </Button>
@@ -105,23 +79,19 @@ export const Menu = () => {
   const shouldShowAsMenu = useBreakpointValue({ base: true, md: false });
 
   return shouldShowAsMenu ? (
-    <Stack padding={4}>
+    <Stack>
       <DrawerWrapper>
         {(onClose) => (
           <>
             {routes.map(({ groupName, items }) => (
               <Stack key={groupName}>
-                <Heading as="h4" size="md">
+                <Heading as="h2" textStyle="menu">
                   {groupName}
                 </Heading>
-                <UnorderedList
-                  role="navigation"
-                  listStyleType="none"
-                  spacing={1}
-                >
+                <UnorderedList role="navigation" listStyleType="none">
                   {items.map(({ href, name }) => (
-                    <ListItem key={href} onClick={onClose}>
-                      <OurLink href={href} text={name} />
+                    <ListItem key={href} onClick={onClose} textStyle="link">
+                      <Link href={href} text={name} type={LinkType.Menu} />
                     </ListItem>
                   ))}
                 </UnorderedList>
@@ -132,16 +102,16 @@ export const Menu = () => {
       </DrawerWrapper>
     </Stack>
   ) : (
-    <Stack borderWidth={1} padding={4} rounded="md" spacing={4}>
+    <Stack spacing="70px" direction={"row"}>
       {routes.map(({ groupName, items }) => (
         <Stack key={groupName}>
-          <Heading as="h4" size="md">
+          <Container as="h2" textStyle="menu" padding="0">
             {groupName}
-          </Heading>
+          </Container>
           <UnorderedList role="navigation" listStyleType="none" spacing={1}>
             {items.map(({ href, name }) => (
               <ListItem key={href}>
-                <OurLink href={href} text={name} />
+                <Link href={href} text={name} type={LinkType.Menu} />
               </ListItem>
             ))}
           </UnorderedList>

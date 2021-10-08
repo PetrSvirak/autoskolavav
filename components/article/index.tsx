@@ -1,11 +1,10 @@
 import { NextPage } from "next";
-import { Container, Heading, Stack } from "@chakra-ui/react";
-import { ContentHead } from "../contentHead";
 import { deliveryClient } from "../../deliveryClient/deliveryClient";
 import { Article as ArticleModel } from "../../deliveryClient/models/article";
 import { ArticleHtmlParser } from "./articleHtmlParser";
 import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
 import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
+import { StackedContentWithHeading } from "../layout/stackedContentWithHeading";
 
 export const createGetArticleProps = (codename: string, pageName: string) =>
   catchEmAllStatic(async () => {
@@ -29,13 +28,7 @@ export const createGetArticleProps = (codename: string, pageName: string) =>
 export const Article: NextPage<
   InferCreatorStaticPropsType<typeof createGetArticleProps>
 > = ({ articleHtml, pageName }) => (
-  <Container padding="4">
-    <ContentHead pageName={pageName} />
-    <Stack>
-      <Heading as="h1" size="lg">
-        {pageName}
-      </Heading>
-      <ArticleHtmlParser html={articleHtml} />
-    </Stack>
-  </Container>
+  <StackedContentWithHeading pageName={pageName}>
+    <ArticleHtmlParser html={articleHtml} />
+  </StackedContentWithHeading>
 );

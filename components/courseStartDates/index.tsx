@@ -2,12 +2,11 @@ import { deliveryClient } from "../../deliveryClient/deliveryClient";
 import { TermsPage } from "../../deliveryClient/models/terms_page";
 import { Term } from "../../deliveryClient/models/term";
 import { Date as SchoolDate } from "../../deliveryClient/models/date";
-import { Container, Heading, Stack } from "@chakra-ui/react";
-import { ContentHead } from "../contentHead";
 import { NextPage } from "next";
 import { InferCreatorStaticPropsType } from "../../utilities/inferCreatorPropsType";
 import { CourseGroup } from "./courseGroup";
 import { catchEmAllStatic } from "../../utilities/catchEmAllStatic";
+import { StackedContentWithHeading } from "../layout/stackedContentWithHeading";
 
 export const createGetCourseStartDatesProps = (
   type: "professional_terms" | "classic_terms",
@@ -50,17 +49,9 @@ export const createGetCourseStartDatesProps = (
 export const CourseStartDates: NextPage<
   InferCreatorStaticPropsType<typeof createGetCourseStartDatesProps>
 > = ({ courseGroups, pageName }) => (
-  <Container padding="4">
-    <Stack spacing={6}>
-      <ContentHead pageName={pageName} />
-      <Heading as="h1" size="lg">
-        {pageName}
-      </Heading>
-      <Stack spacing={8}>
-        {courseGroups.map((courseGroup) => (
-          <CourseGroup key={courseGroup.name} {...courseGroup} />
-        ))}
-      </Stack>
-    </Stack>
-  </Container>
+  <StackedContentWithHeading pageName={pageName}>
+    {courseGroups.map((courseGroup) => (
+      <CourseGroup key={courseGroup.name} {...courseGroup} />
+    ))}
+  </StackedContentWithHeading>
 );

@@ -1,26 +1,9 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { createBreakpoints } from "@chakra-ui/theme-tools";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Layout } from "../components/layout/layout";
-
-const theme = extendTheme({
-  colors: {
-    brand: {
-      100: "#f7fafc",
-      // ...
-      900: "#1a202c",
-    },
-  },
-  breakpoints: createBreakpoints({
-    sm: "30em",
-    md: "48em",
-    lg: "62em",
-    xl: "80em",
-    "2xl": "96em",
-  }),
-});
+import { orangeBlueTheme } from "../themes/orangeBlue";
 
 const App = ({ Component, pageProps }) => (
-  <ChakraProvider theme={theme}>
+  <ChakraProvider theme={orangeBlueTheme}>
     <Layout>
       <Component {...pageProps} />
     </Layout>

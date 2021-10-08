@@ -880,6 +880,21 @@
   "resolved" "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz"
   "version" "0.2.5"
 
+"@fontsource/dm-serif-display@^4.5.0":
+  "integrity" "sha512-iFUuJ8m3GRpH+ZK8xYKtAj+X7LVn3mdpDbh+lqzPBRbRhwlQkM0AjTXtHwHe7CrD6JGbGrk1kHSCCQJt2IRmfg=="
+  "resolved" "https://registry.npmjs.org/@fontsource/dm-serif-display/-/dm-serif-display-4.5.0.tgz"
+  "version" "4.5.0"
+
+"@fontsource/open-sans@^4.5.1":
+  "integrity" "sha512-Zvse9PG3XU+gfa44i4ENXvZi28X0RTtuc/b1v4AaqrSpSf2OALN2QrBf91BOC5gXU1Y6xW/S0To5wz8EraLPlQ=="
+  "resolved" "https://registry.npmjs.org/@fontsource/open-sans/-/open-sans-4.5.1.tgz"
+  "version" "4.5.1"
+
+"@fontsource/roboto-slab@^4.5.1":
+  "integrity" "sha512-SE7R7QZNtzGfJbh8xdA8JDsTOQKJyY5EcndDssOw5tmnoxac/N2TSQSGv8GXMexhV90pQe+OoHTBVDVycdTlLg=="
+  "resolved" "https://registry.npmjs.org/@fontsource/roboto-slab/-/roboto-slab-4.5.1.tgz"
+  "version" "4.5.1"
+
 "@hapi/accept@5.0.2":
   "integrity" "sha512-CmzBx/bXUR8451fnZRuZAJRlzgm0Jgu5dltTX/bszmR2lheb9BpyN47Q1RbaGTsvFzn0PXAEs+lXDKfshccYZw=="
   "resolved" "https://registry.npmjs.org/@hapi/accept/-/accept-5.0.2.tgz"

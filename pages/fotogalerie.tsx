@@ -1,12 +1,9 @@
 import React from "react";
-import { ContentHead } from "../components/contentHead";
 import { InferGetStaticPropsType, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../deliveryClient/models/vehicle";
 import {
   Box,
-  Container,
-  Heading,
   Image,
   SimpleGrid,
   Stack,
@@ -15,7 +12,9 @@ import {
 import { Gallery } from "../deliveryClient/models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
-import { ModalWindow } from "../components/Modal";
+import { ModalWindow } from "../components/ModalWindow";
+import { Heading, HeadingType, Size } from "../components/Heading";
+import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;
@@ -85,72 +84,75 @@ const PhotoGallery: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ photosByType }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedSrc, setSelectedSrc] = React.useState("");
+  const [
+    selectedImage,
+    setSelectedImage,
+  ] = React.useState<PhotoGalleryViewModel>(null);
   const close = () => {
     onClose();
-    setSelectedSrc("");
+    setSelectedImage(null);
   };
-  const open = (src: string) => {
+  const open = (image: PhotoGalleryViewModel) => {
     onOpen();
-    setSelectedSrc(src);
+    setSelectedImage(image);
   };
   return (
-    <>
-      <ModalWindow isOpened={selectedSrc && isOpen} onClose={close}>
-        <Image src={`${selectedSrc}?w=1200&h=800`} />
+    <StackedContentWithHeading pageName="Fotogalerie">
+      <ModalWindow
+        isOpened={selectedImage && isOpen}
+        onClose={close}
+        title={selectedImage?.name}
+      >
+        <Image
+          src={`${selectedImage?.photoSrc}?w=1200&h=800`}
+          width="1200px"
+          height="800px"
+        />
       </ModalWindow>
-      <Container padding="4">
-        <ContentHead pageName="Fotogalerie" />
-        <Stack>
-          <Heading as="h1" size="lg">
-            Fotogalerie
-          </Heading>
-          <Stack spacing={4}>
-            {photosByType.map(([typeCodeName, photos]) => (
-              <Stack
-                as="section"
-                key={typeCodeName}
-                borderWidth={1}
-                padding={4}
-                rounded="md"
-              >
-                {photos[0]?.typeName && (
-                  <Heading as="h2" size="md">
-                    {photos[0]?.typeName}
-                  </Heading>
-                )}
-                <SimpleGrid columns={[1, null, 2]} gap={5}>
-                  {photos.map((viewModel) => {
-                    const photoSrc232w = `${viewModel.photoSrc}?w=232&h=232`;
-                    const photoSrc600w = `${viewModel.photoSrc}?w=600&h=400`;
-                    return (
-                      <Box
-                        key={viewModel.name}
-                        as="a"
-                        href="#"
-                        onClick={(e: any) => {
-                          e.preventDefault();
-                          open(viewModel.photoSrc);
-                        }}
-                      >
-                        <Image
-                          boxSize="100%"
-                          src={photoSrc232w}
-                          objectFit="cover"
-                          srcSet={`${photoSrc600w} 600w, ${photoSrc232w} 232w`}
-                          sizes="(max-width: 767px) 600px,
-                                      232px"
-                        />
-                      </Box>
-                    );
-                  })}
-                </SimpleGrid>
-              </Stack>
-            ))}
+      <Stack spacing={4}>
+        {photosByType.map(([typeCodeName, photos]) => (
+          <Stack
+            as="section"
+            key={typeCodeName}
+            borderWidth={1}
+            padding={4}
+            rounded="md"
+          >
+            {photos[0]?.typeName && (
+                <Heading size={Size.H2} type={HeadingType.Secondary}>
+                {photos[0]?.typeName}
+              </Heading>
+            )}
+            <SimpleGrid columns={[1, null, 4]} gap={5}>
+              {photos.map((viewModel) => {
+                const photoSrc232w = `${viewModel.photoSrc}?w=232&h=232`;
+                const photoSrc600w = `${viewModel.photoSrc}?w=600&h=400`;
+                return (
+                  <Box
+                    key={viewModel.name}
+                    as="a"
+                    href="#"
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      open(viewModel);
+                    }}
+                  >
+                    <Image
+                      boxSize="100%"
+                      title={viewModel.name}
+                      src={photoSrc232w}
+                      objectFit="cover"
+                      srcSet={`${photoSrc600w} 600w, ${photoSrc232w} 232w`}
+                      sizes="(max-width: 767px) 600px, 232px"
+                    />
+                  </Box>
+                );
+              })}
+            </SimpleGrid>
           </Stack>
-        </Stack>
-      </Container>
-    </>
+        ))}
+      </Stack>
+    </StackedContentWithHeading>
   );
 };
 

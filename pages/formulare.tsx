@@ -1,11 +1,12 @@
 import { NextPage } from "next";
-import { Box, Heading, Link, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Box, Link, ListItem, UnorderedList } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Forms as FormsModel } from "../deliveryClient/models/forms";
 import { Form as FormModel } from "../deliveryClient/models/form";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
+import { Heading, HeadingType, Size } from "../components/Heading";
 
 type Form = {
   readonly text: string;
@@ -64,13 +65,13 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
 }) => (
   <StackedContentWithHeading pageName="Formuláře">
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Běžní řidiči:
       </Heading>
       {renderForms(ordinaryDriversForms)}
     </Box>
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Profesionální řidiči:
       </Heading>
       {renderForms(professionalDriversForms)}

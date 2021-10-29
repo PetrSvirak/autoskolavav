@@ -1,6 +1,5 @@
 import {
   Link,
-  Heading,
   Text,
   UnorderedList,
   ListItem,
@@ -9,6 +8,7 @@ import {
 import { FunctionComponent } from "react";
 import { parse } from "himalaya";
 import NextLink from "next/link";
+import { Heading, HeadingType, Size } from "../Heading";
 
 type RichTextHtmlParserProps = {
   readonly html: string;
@@ -39,25 +39,25 @@ const parseElement = (element, index) => {
       );
     case "h1":
       return (
-        <Heading key={index} as="h1" size="4xl">
+        <Heading size={Size.H1} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h2":
       return (
-        <Heading key={index} as="h2" size="3xl">
+        <Heading size={Size.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h3":
       return (
-        <Heading key={index} as="h3" size="2xl">
+        <Heading size={Size.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h4":
       return (
-        <Heading key={index} as="h4" size="1xl">
+        <Heading size={Size.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );

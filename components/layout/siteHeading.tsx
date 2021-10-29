@@ -9,7 +9,7 @@ import { Menu } from "./menu";
 
 const Logo = () => (
   <ChakraLink href="/" textStyle="link" _hover={{ textDecoration: "none" }}>
-    <Heading as="h1" size="xl" textAlign="center">
+    <Heading as="h1" textAlign="center">
       <Container textStyle="logo-head">V&V</Container>
       <Container textStyle="logo-tail">Autoškola</Container>
       <Container textStyle="logo-preview">

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Contact as ContactModel } from "../deliveryClient/models/contact";
 import { PhoneNumber as PhoneNumberModel } from "../deliveryClient/models/phone_number";
@@ -7,6 +7,7 @@ import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
 import React from "react";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
+import { Heading, HeadingType, Size } from "../components/Heading";
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const contactItem = await deliveryClient
@@ -61,7 +62,7 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
 }) => (
   <StackedContentWithHeading pageName="Kontakt">
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Adresa:
       </Heading>
       <Text>
@@ -73,26 +74,26 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
       {renderNote(addressNote)}
     </Box>
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Telefon:
       </Heading>
       {renderPhoneNumbers(phoneNumbers)}
     </Box>
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         E-mail:
       </Heading>
       <Text>{eMail}</Text>
     </Box>
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Úřední hodiny:
       </Heading>
       <Text>{officeHours}</Text>
       {renderNote(officeHoursNote)}
     </Box>
     <Box>
-      <Heading as="h2" size="sm">
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
         Mapa:
       </Heading>
       <a href={mapLink} target="_blank">

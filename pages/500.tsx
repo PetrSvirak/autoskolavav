@@ -1,10 +1,11 @@
-import { Center, Container, Divider, Heading, Stack } from "@chakra-ui/react";
+import { Center, Container, Divider, Stack } from "@chakra-ui/react";
+import { Heading, HeadingType, Size } from "../components/Heading";
 
 const Custom500 = () => (
   <Container>
     <Center h="50vh">
       <Stack direction="row" spacing={4}>
-        <Heading as="h1" size="xl">
+        <Heading size={Size.H1} type={HeadingType.Secondary}>
           500
         </Heading>
         <Divider orientation="vertical" h="24" />

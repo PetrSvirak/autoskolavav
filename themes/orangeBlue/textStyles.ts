@@ -2,7 +2,7 @@ import "@fontsource/open-sans/300.css";
 import "@fontsource/open-sans/400.css";
 import "@fontsource/open-sans/600.css";
 import "@fontsource/open-sans/800.css";
-import "@fontsource/roboto-slab/300.css";
+import "@fontsource/roboto-slab/400.css";
 import "@fontsource/dm-serif-display/400.css";
 
 export const fontWeights = {
@@ -10,8 +10,8 @@ export const fontWeights = {
   "bold-heading": 400,
   "bold-text": 400,
 
-  "normal-text": 300,
-  "normal-link": 300,
+  "normal-text": 400,
+  "normal-link": 400,
 };
 
 export const textStyles = {

@@ -10,9 +10,10 @@ const headerItems: TableHeaderItem[] = [
   { name: "Volná místa" },
 ];
 
-export const DatesTable: FunctionComponent<{ dates: CourseDateType[] }> = ({
-  dates,
-}) => (
+export const DatesTable: FunctionComponent<{
+  dates: CourseDateType[];
+  title: string;
+}> = ({ dates, title }) => (
   <Table
     headerItems={headerItems}
     rows={dates}
@@ -26,5 +27,6 @@ export const DatesTable: FunctionComponent<{ dates: CourseDateType[] }> = ({
         </Td>
       </Tr>
     )}
+    title={title}
   />
 );

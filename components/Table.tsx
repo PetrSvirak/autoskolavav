@@ -19,9 +19,11 @@ export const createTable = <TableRow extends object>(): FunctionComponent<
   TableProps<TableRow>
 > => ({ headerItems, rows, renderRow, additionalRow, title }) => (
   <Stack spacing={2}>
-    <Heading size={Size.H2} type={HeadingType.Secondary}>
-      {title}
-    </Heading>
+    {title && (
+      <Heading size={Size.H2} type={HeadingType.Secondary}>
+        {title}
+      </Heading>
+    )}
     <Table size="md" variant="simple">
       <Thead>
         <Tr>

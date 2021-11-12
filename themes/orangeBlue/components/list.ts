@@ -1,7 +1,11 @@
 export const List = {
   baseStyle: {
     container: {
-      px: 4,
+      fontFamily: "Roboto Slab, serif",
+      fontWeight: "normal-text",
+      fontSize: "16px",
+      textColor: "complement-secondary",
+      px: "16px",
     },
   },
 };

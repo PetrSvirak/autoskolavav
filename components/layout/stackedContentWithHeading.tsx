@@ -7,7 +7,7 @@ export const StackedContentWithHeading: React.FC<{ pageName: string }> = ({
   pageName,
   children,
 }) => (
-  <Box w="site" padding="4">
+  <Box maxW="site" padding="4">
     <ContentHead pageName={pageName} />
     <Stack spacing={8}>
       <Heading size={Size.H1} type={HeadingType.Secondary}>

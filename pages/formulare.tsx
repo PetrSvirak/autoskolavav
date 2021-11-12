@@ -66,13 +66,13 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   <StackedContentWithHeading pageName="Formuláře">
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Běžní řidiči:
+        Běžní řidiči
       </Heading>
       {renderForms(ordinaryDriversForms)}
     </Box>
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Profesionální řidiči:
+        Profesionální řidiči
       </Heading>
       {renderForms(professionalDriversForms)}
     </Box>

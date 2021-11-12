@@ -63,7 +63,7 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   <StackedContentWithHeading pageName="Kontakt">
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Adresa:
+        Adresa
       </Heading>
       <Text>
         {street} {streetNumber}
@@ -75,26 +75,26 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
     </Box>
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Telefon:
+        Telefon
       </Heading>
       {renderPhoneNumbers(phoneNumbers)}
     </Box>
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        E-mail:
+        E-mail
       </Heading>
       <Text>{eMail}</Text>
     </Box>
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Úřední hodiny:
+        Úřední hodiny
       </Heading>
       <Text>{officeHours}</Text>
       {renderNote(officeHoursNote)}
     </Box>
     <Box>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
-        Mapa:
+        Mapa
       </Heading>
       <a href={mapLink} target="_blank">
         <Image

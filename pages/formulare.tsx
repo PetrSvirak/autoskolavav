@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, Link, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Box, Link, ListItem, Stack, UnorderedList } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Forms as FormsModel } from "../deliveryClient/models/forms";
 import { Form as FormModel } from "../deliveryClient/models/form";
@@ -64,18 +64,18 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   professionalDriversForms,
 }) => (
   <StackedContentWithHeading pageName="Formuláře">
-    <Box>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Běžní řidiči
       </Heading>
       {renderForms(ordinaryDriversForms)}
-    </Box>
-    <Box>
+    </Stack>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Profesionální řidiči
       </Heading>
       {renderForms(professionalDriversForms)}
-    </Box>
+    </Stack>
   </StackedContentWithHeading>
 );
 

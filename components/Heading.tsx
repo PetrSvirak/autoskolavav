@@ -22,7 +22,7 @@ const mapToAs: Record<Size, As> = {
 };
 
 export const Heading: React.FC<HeadingProps> = ({ size, type, children }) => (
-  <Box bg={type} mb={2} px={4} py={2} w="fit-content">
+  <Box bg={type} px={4} py={2} w="fit-content">
     <ChakraHeading as={mapToAs[size]} variant={type} size={size}>
       {children}
     </ChakraHeading>

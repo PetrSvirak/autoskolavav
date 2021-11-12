@@ -105,7 +105,7 @@ const PhotoGallery: NextPage<
       </ModalWindow>
       <Stack spacing={8}>
         {photosByType.map(([typeCodeName, photos]) => (
-          <Stack as="section" key={typeCodeName}>
+          <Stack as="section" key={typeCodeName} spacing={4}>
             {photos[0]?.typeName && (
               <Heading size={Size.H2} type={HeadingType.Secondary}>
                 {photos[0]?.typeName}

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Stack, Text } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Contact as ContactModel } from "../deliveryClient/models/contact";
 import { PhoneNumber as PhoneNumberModel } from "../deliveryClient/models/phone_number";
@@ -61,45 +61,47 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   mapLink,
 }) => (
   <StackedContentWithHeading pageName="Kontakt">
-    <Box>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Adresa
       </Heading>
-      <Text>
-        {street} {streetNumber}
-      </Text>
-      <Text>
-        {city}, {zipCode}
-      </Text>
+      <Box>
+        <Text>
+          {street} {streetNumber}
+        </Text>
+        <Text>
+          {city}, {zipCode}
+        </Text>
+      </Box>
       {renderNote(addressNote)}
-    </Box>
-    <Box>
+    </Stack>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Telefon
       </Heading>
       {renderPhoneNumbers(phoneNumbers)}
-    </Box>
-    <Box>
+    </Stack>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         E-mail
       </Heading>
       <Text>{eMail}</Text>
-    </Box>
-    <Box>
+    </Stack>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Úřední hodiny
       </Heading>
       <Text>{officeHours}</Text>
       {renderNote(officeHoursNote)}
-    </Box>
-    <Box>
+    </Stack>
+    <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Mapa
       </Heading>
       <a href={mapLink} target="_blank">
         <Image src={mapAssetLink} />
       </a>
-    </Box>
+    </Stack>
   </StackedContentWithHeading>
 );
 

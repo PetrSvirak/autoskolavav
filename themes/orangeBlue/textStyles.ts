@@ -41,29 +41,11 @@ export const textStyles = {
     fontSize: "32px",
     textColor: "secondary",
   },
-  link: {
-    fontFamily: "Roboto Slab, serif",
-    fontWeight: "normal-text",
-    fontSize: "16px",
-    textColor: "primary",
-  },
   menu: {
     fontFamily: "DM Serif Display, serif",
     fontWeight: "bold-heading",
     fontSize: "20px",
     textColor: "complement-secondary",
-  },
-  "menu-link": {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: "normal-link",
-    fontSize: "16px",
-    textColor: "complement-secondary",
-  },
-  "menu-link-active": {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: "bold-link",
-    fontSize: "16px",
-    textColor: "primary",
   },
   news: {
     fontFamily: "Open Sans, sans-serif",

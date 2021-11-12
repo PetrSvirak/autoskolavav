@@ -18,42 +18,28 @@ type LinkProps = Readonly<{
 const MenuLink = ({ href, text }) => {
   const { pathname } = useRouter();
 
-  const textStyle = pathname === href ? "menu-link-active" : "menu-link";
+  const linkVariant = pathname === href ? "in-menu-active" : "in-menu";
 
   return (
     <NextLink href={href} passHref>
-      <ChakraLink textStyle={textStyle}>{text}</ChakraLink>
+      <ChakraLink variant={linkVariant}>{text}</ChakraLink>
     </NextLink>
   );
 };
 
-const linkFocusStyle = {
-  color: "primary",
-  textDecoration: "underline",
-};
-
 const InSiteLink = ({ href, text }) => (
   <NextLink href={href} passHref>
-    <ChakraLink textStyle="link" _focus={linkFocusStyle}>
-      {text}
-    </ChakraLink>
+    <ChakraLink>{text}</ChakraLink>
   </NextLink>
 );
 
 const OutSiteLink = ({ href, text }) => {
-  const { pathname } = useRouter();
-
   if (!isValidHttpUrl(href)) {
     return <b>Invalid URI!</b>;
   }
 
   return (
-    <ChakraLink
-      href={href}
-      textStyle="link"
-      target="_blank"
-      _focus={linkFocusStyle}
-    >
+    <ChakraLink href={href} target="_blank">
       {text}
     </ChakraLink>
   );

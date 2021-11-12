@@ -8,7 +8,7 @@ import { breakpoints } from "./orangeBlue/breakpoints";
 import { Link } from "./orangeBlue/components/link";
 import { Table } from "./orangeBlue/components/table";
 import { List } from "./orangeBlue/components/list";
-import { Text as TextStyle } from "./orangeBlue/components/text";
+import { Text } from "./orangeBlue/components/text";
 
 export const orangeBlueTheme = extendTheme({
   colors,
@@ -18,7 +18,7 @@ export const orangeBlueTheme = extendTheme({
     Link,
     List,
     Table,
-    Text: TextStyle,
+    Text,
   },
   fontWeights,
   sizes,

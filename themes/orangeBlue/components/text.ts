@@ -1,5 +1,11 @@
-export const Text = {
+import { ComponentStyleConfig } from "@chakra-ui/theme/dist/types/theme.types";
+
+export const Text: ComponentStyleConfig = {
   baseStyle: {
-    px: 4,
+    fontFamily: "Roboto Slab, serif",
+    fontWeight: "normal-text",
+    fontSize: "16px",
+    textColor: "complement-secondary",
+    px: "16px",
   },
 };

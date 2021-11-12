@@ -1,4 +1,6 @@
-export const Heading = {
+import { ComponentStyleConfig } from "@chakra-ui/theme/dist/types/theme.types";
+
+export const Heading: ComponentStyleConfig = {
   baseStyle: {
     fontFamily: "Open Sans, sans-serif",
     textColor: "complement-primary",

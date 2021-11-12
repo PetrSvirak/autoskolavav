@@ -1,4 +1,6 @@
-export const Link = {
+import { ComponentStyleConfig } from "@chakra-ui/theme/dist/types/theme.types";
+
+export const Link: ComponentStyleConfig = {
   baseStyle: {
     fontFamily: "Roboto Slab, serif",
     fontWeight: "normal-link",

@@ -22,7 +22,7 @@ export const createTable = <TableRow extends object>(): FunctionComponent<
     <Heading size={Size.H2} type={HeadingType.Secondary}>
       {title}
     </Heading>
-    <Table size="sm" variant="striped">
+    <Table size="md" variant="simple">
       <Thead>
         <Tr>
           {headerItems.map((item, index) => (

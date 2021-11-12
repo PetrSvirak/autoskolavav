@@ -2,13 +2,7 @@ import React from "react";
 import { InferGetStaticPropsType, NextPage } from "next";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../deliveryClient/models/vehicle";
-import {
-  Box,
-  Image,
-  SimpleGrid,
-  Stack,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Stack, useDisclosure } from "@chakra-ui/react";
 import { Gallery } from "../deliveryClient/models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
@@ -109,17 +103,11 @@ const PhotoGallery: NextPage<
           height="800px"
         />
       </ModalWindow>
-      <Stack spacing={4}>
+      <Stack spacing={8}>
         {photosByType.map(([typeCodeName, photos]) => (
-          <Stack
-            as="section"
-            key={typeCodeName}
-            borderWidth={1}
-            padding={4}
-            rounded="md"
-          >
+          <Stack as="section" key={typeCodeName}>
             {photos[0]?.typeName && (
-                <Heading size={Size.H2} type={HeadingType.Secondary}>
+              <Heading size={Size.H2} type={HeadingType.Secondary}>
                 {photos[0]?.typeName}
               </Heading>
             )}

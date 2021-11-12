@@ -97,12 +97,7 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
         Mapa
       </Heading>
       <a href={mapLink} target="_blank">
-        <Image
-          boxSize="100%"
-          src={mapAssetLink}
-          objectFit="cover"
-          sizes="(max-width: 767px) 600px, 232px"
-        />
+        <Image src={mapAssetLink} />
       </a>
     </Box>
   </StackedContentWithHeading>

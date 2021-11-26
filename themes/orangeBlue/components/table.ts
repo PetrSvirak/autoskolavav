@@ -1,4 +1,6 @@
-export const Table = {
+import { ComponentStyleConfig } from "@chakra-ui/theme";
+
+export const Table: ComponentStyleConfig = {
   sizes: {
     md: {
       td: {

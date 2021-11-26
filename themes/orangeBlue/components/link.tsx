@@ -1,4 +1,4 @@
-import { ComponentStyleConfig } from "@chakra-ui/theme/dist/types/theme.types";
+import { ComponentStyleConfig } from "@chakra-ui/react";
 
 export const Link: ComponentStyleConfig = {
   baseStyle: {

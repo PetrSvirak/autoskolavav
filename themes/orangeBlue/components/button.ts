@@ -1,4 +1,6 @@
-export const Button = {
+import { ComponentStyleConfig } from "@chakra-ui/theme";
+
+export const Button: ComponentStyleConfig = {
   baseStyle: {
     fontFamily: "Open Sans, sans-serif",
     fontWeight: 600,

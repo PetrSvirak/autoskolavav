@@ -1,6 +1,11 @@
 import { FunctionComponent } from "react";
-import { Center, Radio, RadioGroup, Stack } from "@chakra-ui/react";
-import { StackDirection } from "@chakra-ui/layout/dist/types/stack.utils";
+import {
+  Center,
+  Radio,
+  RadioGroup,
+  Stack,
+  StackDirection,
+} from "@chakra-ui/react";
 import { SystemProps } from "@chakra-ui/system";
 
 type ActiveDotsProp = {

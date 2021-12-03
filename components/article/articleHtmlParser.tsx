@@ -1,79 +1,71 @@
-import {
-  Link,
-  Text,
-  UnorderedList,
-  ListItem,
-  OrderedList,
-} from "@chakra-ui/react";
+import { ListItem, Stack } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { parse } from "himalaya";
-import NextLink from "next/link";
-import { Heading, HeadingType, Size } from "../Heading";
+import { Heading, HeadingSize, HeadingType } from "../Heading";
+import { Link, LinkType } from "../Link";
+import { isValidHttpUrl } from "../../utilities/isValidUri";
+import { Text, TextType } from "../Text";
+import { ListType, OrderedList, UnorderedList } from "../List";
 
 type RichTextHtmlParserProps = {
   readonly html: string;
 };
 
-const parseText = (text) =>
+const parseText = (text): string =>
   text.content.replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
 
 const parseElement = (element, index) => {
   switch (element.tagName) {
     case "p":
       return (
-        <Text key={index}>
+        <Text key={index} type={TextType.BodyOfText}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Text>
       );
     case "strong":
       return (
-        <Text key={index} as="strong">
+        <Text key={index} type={TextType.Bold}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Text>
       );
     case "em":
       return (
-        <Text key={index} as="em">
+        <Text key={index} type={TextType.Italic}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Text>
       );
     case "h1":
       return (
-        <Heading size={Size.H1} type={HeadingType.Secondary}>
+        <Heading size={HeadingSize.H1} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h2":
       return (
-        <Heading size={Size.H2} type={HeadingType.Secondary}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h3":
       return (
-        <Heading size={Size.H2} type={HeadingType.Secondary}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h4":
       return (
-        <Heading size={Size.H2} type={HeadingType.Secondary}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "a":
+      const href = element.attributes[1].value;
       return (
-        <NextLink key={index} href={element.attributes[1].value} passHref>
-          <Link>
-            {element.children.map((node, index) => parseNode(node, index))}
-          </Link>
-        </NextLink>
-      );
-    case "ol":
-      return (
-        <OrderedList key={index} listStylePosition="inside">
-          {element.children.map((node, index) => parseNode(node, index))}
-        </OrderedList>
+        <Link
+          type={isValidHttpUrl(href) ? LinkType.OutSite : LinkType.InSite}
+          href={href}
+          text={element.children.map((node, index) => parseNode(node, index))}
+        />
       );
     case "li":
       return (
@@ -81,9 +73,15 @@ const parseElement = (element, index) => {
           {element.children.map((node, index) => parseNode(node, index))}
         </ListItem>
       );
+    case "ol":
+      return (
+        <OrderedList key={index}>
+          {element.children.map((node, index) => parseNode(node, index))}
+        </OrderedList>
+      );
     case "ul":
       return (
-        <UnorderedList key={index} listStylePosition="inside">
+        <UnorderedList key={index} type={ListType.BodyOfText}>
           {element.children.map((node, index) => parseNode(node, index))}
         </UnorderedList>
       );
@@ -108,5 +106,9 @@ export const ArticleHtmlParser: FunctionComponent<RichTextHtmlParserProps> = ({
 }) => {
   const parsedHtml = parse(html);
 
-  return parsedHtml.map((node, index) => parseNode(node, index));
+  return (
+    <Stack m="space-paragraph">
+      {parsedHtml.map((node, index) => parseNode(node, index))}
+    </Stack>
+  );
 };

@@ -1,7 +1,7 @@
 import { As, Box, Heading as ChakraHeading } from "@chakra-ui/react";
 import React from "react";
 
-export enum Size {
+export enum HeadingSize {
   H1 = "h1",
   H2 = "h2",
 }
@@ -12,17 +12,17 @@ export enum HeadingType {
 }
 
 type HeadingProps = Readonly<{
-  size: Size;
+  size: HeadingSize;
   type: HeadingType;
 }>;
 
-const mapToAs: Record<Size, As> = {
-  [Size.H1]: "h1",
-  [Size.H2]: "h2",
+const mapToAs: Record<HeadingSize, As> = {
+  [HeadingSize.H1]: "h1",
+  [HeadingSize.H2]: "h2",
 };
 
 export const Heading: React.FC<HeadingProps> = ({ size, type, children }) => (
-  <Box bg={type} px={4} py={2} w="fit-content">
+  <Box bg={type} w="fit-content" mb={2}>
     <ChakraHeading as={mapToAs[size]} variant={type} size={size}>
       {children}
     </ChakraHeading>

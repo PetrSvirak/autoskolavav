@@ -1,6 +1,6 @@
 import { Stack, Table, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 import { FunctionComponent, Fragment } from "react";
-import { Heading, HeadingType, Size } from "./Heading";
+import { Heading, HeadingType, HeadingSize } from "./Heading";
 
 export type TableHeaderItem = {
   readonly name: string;
@@ -20,7 +20,7 @@ export const createTable = <TableRow extends object>(): FunctionComponent<
 > => ({ headerItems, rows, renderRow, additionalRow, title }) => (
   <Stack spacing={2}>
     {title && (
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         {title}
       </Heading>
     )}

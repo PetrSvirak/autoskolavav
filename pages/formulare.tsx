@@ -6,7 +6,7 @@ import { Form as FormModel } from "../deliveryClient/models/form";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
-import { Heading, HeadingType, Size } from "../components/Heading";
+import { Heading, HeadingSize, HeadingType } from "../components/Heading";
 
 type Form = {
   readonly text: string;
@@ -65,13 +65,13 @@ const Forms: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
 }) => (
   <StackedContentWithHeading pageName="Formuláře">
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Běžní řidiči
       </Heading>
       {renderForms(ordinaryDriversForms)}
     </Stack>
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Profesionální řidiči
       </Heading>
       {renderForms(professionalDriversForms)}

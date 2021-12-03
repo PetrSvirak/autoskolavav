@@ -4,6 +4,8 @@ export const Heading: ComponentStyleConfig = {
   baseStyle: {
     fontFamily: "Open Sans, sans-serif",
     textColor: "complement-primary",
+    px: 4,
+    py: 2,
   },
   variants: {
     primary: {},

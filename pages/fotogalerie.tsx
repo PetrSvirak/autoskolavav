@@ -7,7 +7,7 @@ import { Gallery } from "../deliveryClient/models/gallery";
 import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { ModalWindow } from "../components/ModalWindow";
-import { Heading, HeadingType, Size } from "../components/Heading";
+import { Heading, HeadingType, HeadingSize } from "../components/Heading";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
 
 type PhotoGalleryViewModel = {
@@ -107,7 +107,7 @@ const PhotoGallery: NextPage<
         {photosByType.map(([typeCodeName, photos]) => (
           <Stack as="section" key={typeCodeName} spacing={4}>
             {photos[0]?.typeName && (
-              <Heading size={Size.H2} type={HeadingType.Secondary}>
+              <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
                 {photos[0]?.typeName}
               </Heading>
             )}

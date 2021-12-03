@@ -7,7 +7,7 @@ import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType";
 import React from "react";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
-import { Heading, HeadingType, Size } from "../components/Heading";
+import { Heading, HeadingSize, HeadingType } from "../components/Heading";
 import { Text, TextType } from "../components/Text";
 
 export const getStaticProps = catchEmAllStatic(async () => {
@@ -69,7 +69,7 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
 }) => (
   <StackedContentWithHeading pageName="Kontakt">
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Adresa
       </Heading>
       <Box>
@@ -83,26 +83,26 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
       {renderNote(addressNote)}
     </Stack>
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Telefon
       </Heading>
       {renderPhoneNumbers(phoneNumbers)}
     </Stack>
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         E-mail
       </Heading>
       <Text type={TextType.BodyOfText}>{eMail}</Text>
     </Stack>
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Úřední hodiny
       </Heading>
       <Text type={TextType.BodyOfText}>{officeHours}</Text>
       {renderNote(officeHoursNote)}
     </Stack>
     <Stack spacing={4}>
-      <Heading size={Size.H2} type={HeadingType.Secondary}>
+      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
         Mapa
       </Heading>
       <a href={mapLink} target="_blank">

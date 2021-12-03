@@ -11,11 +11,11 @@ import {
   Heading,
   ListItem,
   Stack,
-  UnorderedList,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link, LinkType } from "../Link";
+import { ListType, UnorderedList } from "../List";
 
 const routes = [
   {
@@ -88,7 +88,7 @@ export const Menu = () => {
                 <Heading as="h2" textStyle="menu">
                   {groupName}
                 </Heading>
-                <UnorderedList role="navigation" listStyleType="none">
+                <UnorderedList role="navigation" type={ListType.Menu}>
                   {items.map(({ href, name }) => (
                     <ListItem key={href} onClick={onClose} textStyle="link">
                       <Link href={href} text={name} type={LinkType.Menu} />
@@ -104,11 +104,11 @@ export const Menu = () => {
   ) : (
     <Stack spacing="70px" direction={"row"}>
       {routes.map(({ groupName, items }) => (
-        <Stack key={groupName}>
+        <Stack key={groupName} spacing={0}>
           <Container as="h2" textStyle="menu" padding="0">
             {groupName}
           </Container>
-          <UnorderedList role="navigation" listStyleType="none" spacing={1}>
+          <UnorderedList type={ListType.Menu} role="navigation">
             {items.map(({ href, name }) => (
               <ListItem key={href}>
                 <Link href={href} text={name} type={LinkType.Menu} />

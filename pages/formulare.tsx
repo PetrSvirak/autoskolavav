@@ -1,5 +1,6 @@
 import { NextPage } from "next";
-import { Box, Link, ListItem, Stack, UnorderedList } from "@chakra-ui/react";
+import { Link, ListItem, Stack } from "@chakra-ui/react";
+import { ListType, UnorderedList } from "../components/List";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Forms as FormsModel } from "../deliveryClient/models/forms";
 import { Form as FormModel } from "../deliveryClient/models/form";
@@ -45,13 +46,13 @@ const getFileExtension = (src: string) =>
   src.toUpperCase().split(/^.*\.(DOCX|DOC|PDF)$/)[1];
 
 const renderForms = (forms: Form[]) => (
-  <UnorderedList spacing={3} listStylePosition="inside">
+  <UnorderedList type={ListType.BodyOfText}>
     {forms.map((form, index) => (
       <ListItem key={index}>
         {form.text}
         {form.src.map((s, index) => (
           <>
-             <Link href={s}>[{getFileExtension(s)}]</Link>
+            <Link href={s}>[{getFileExtension(s)}]</Link>
           </>
         ))}
       </ListItem>

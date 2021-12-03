@@ -3,12 +3,14 @@ import "@fontsource/open-sans/400.css";
 import "@fontsource/open-sans/600.css";
 import "@fontsource/open-sans/800.css";
 import "@fontsource/roboto-slab/400.css";
+import "@fontsource/roboto-slab/600.css";
 import "@fontsource/dm-serif-display/400.css";
 
 export const fontWeights = {
   "bold-link": 400,
   "bold-heading": 400,
-  "bold-text": 400,
+  "bold-news": 400,
+  "bold-text": 600,
 
   "normal-text": 400,
   "normal-link": 400,
@@ -17,7 +19,7 @@ export const fontWeights = {
 export const textStyles = {
   discounts: {
     fontFamily: "Open Sans, sans-serif",
-    fontWeight: "bold-text",
+    fontWeight: "bold-news",
     fontSize: "20px",
     textColor: "complement-secondary",
     textAlign: "left",
@@ -50,14 +52,8 @@ export const textStyles = {
   },
   news: {
     fontFamily: "Open Sans, sans-serif",
-    fontWeight: "bold-text",
+    fontWeight: "bold-news",
     fontSize: "18px",
-    textColor: "complement-secondary",
-  },
-  text: {
-    fontFamily: "Roboto Slab, serif",
-    fontWeight: "normal-text",
-    fontSize: "16px",
     textColor: "complement-secondary",
   },
 };

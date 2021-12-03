@@ -1,7 +1,8 @@
-import { Link, Td, Tr, Text } from "@chakra-ui/react";
+import { Link, Td, Tr } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { createTable, TableHeaderItem } from "../Table";
 import NextLink from "next/link";
+import { Text, TextType } from "../Text";
 
 export type Price = {
   price: number;
@@ -19,7 +20,7 @@ const Table = createTable<Workshop>();
 const renderVehicles = (vehicles?: string[]) =>
   vehicles &&
   vehicles.map((vehicle) => (
-    <Text>
+    <Text type={TextType.Inline}>
       <NextLink key={vehicle} href="/fotogalerie" passHref>
         <Link>{vehicle}</Link>
       </NextLink>

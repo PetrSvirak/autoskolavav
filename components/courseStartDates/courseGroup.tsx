@@ -1,6 +1,7 @@
-import { Box, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { DatesTable } from "./datesTable";
+import {Text, TextType} from "../Text";
 
 export const CourseGroup: FunctionComponent<CourseGroupType> = ({
   dates,
@@ -12,7 +13,7 @@ export const CourseGroup: FunctionComponent<CourseGroupType> = ({
       {dates.length > 0 ? (
         <DatesTable dates={dates} title={name} />
       ) : (
-        <Text>{note}</Text>
+        <Text type={TextType.Inline}>{note}</Text>
       )}
     </Stack>
   </Box>

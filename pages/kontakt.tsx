@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Image, Stack } from "@chakra-ui/react";
 import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Contact as ContactModel } from "../deliveryClient/models/contact";
 import { PhoneNumber as PhoneNumberModel } from "../deliveryClient/models/phone_number";
@@ -8,6 +8,7 @@ import { InferCreatorStaticPropsType } from "../utilities/inferCreatorPropsType"
 import React from "react";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
 import { Heading, HeadingType, Size } from "../components/Heading";
+import { Text, TextType } from "../components/Text";
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const contactItem = await deliveryClient
@@ -37,12 +38,18 @@ export const getStaticProps = catchEmAllStatic(async () => {
 });
 
 const renderPhoneNumbers = (phoneNumbers: string[]) =>
-  phoneNumbers.map((number) => <Text key={number}>{number}</Text>);
+  phoneNumbers.map((number) => (
+    <Text key={number} type={TextType.BodyOfText}>
+      {number}
+    </Text>
+  ));
 
 const renderNote = (addressNote: string) => (
   <Box mt={4}>
     {addressNote.split("\n").map((note) => (
-      <Text key={note}>{note}</Text>
+      <Text key={note} type={TextType.BodyOfText}>
+        {note}
+      </Text>
     ))}
   </Box>
 );
@@ -66,10 +73,10 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
         Adresa
       </Heading>
       <Box>
-        <Text>
+        <Text type={TextType.BodyOfText}>
           {street} {streetNumber}
         </Text>
-        <Text>
+        <Text type={TextType.BodyOfText}>
           {city}, {zipCode}
         </Text>
       </Box>
@@ -85,13 +92,13 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         E-mail
       </Heading>
-      <Text>{eMail}</Text>
+      <Text type={TextType.BodyOfText}>{eMail}</Text>
     </Stack>
     <Stack spacing={4}>
       <Heading size={Size.H2} type={HeadingType.Secondary}>
         Úřední hodiny
       </Heading>
-      <Text>{officeHours}</Text>
+      <Text type={TextType.BodyOfText}>{officeHours}</Text>
       {renderNote(officeHoursNote)}
     </Stack>
     <Stack spacing={4}>

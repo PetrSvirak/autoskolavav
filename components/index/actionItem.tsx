@@ -1,7 +1,8 @@
 import { FunctionComponent, MouseEventHandler } from "react";
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Button, ButtonType } from "../Button";
+import { Text } from "../Text";
 
 type ActionItemProps = {
   readonly action: ActionViewType;

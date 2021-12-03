@@ -4,10 +4,10 @@ export const Table: ComponentStyleConfig = {
   sizes: {
     md: {
       td: {
-        px: 4,
+        pl: 4,
       },
       th: {
-        px: 4,
+        pl: 4,
       },
     },
   },

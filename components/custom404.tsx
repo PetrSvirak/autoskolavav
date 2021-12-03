@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { Center, Container, Divider, Stack } from "@chakra-ui/react";
 import { Heading, HeadingType, Size } from "./Heading";
+import { Text, TextType } from "./Text";
 
 export const Custom404: NextPage = () => (
   <Container>
@@ -10,7 +11,7 @@ export const Custom404: NextPage = () => (
           404
         </Heading>
         <Divider orientation="vertical" h="24" />
-        <text>Stránka nenalezena</text>
+        <Text type={TextType.BodyOfText}>Stránka nenalezena</Text>
       </Stack>
     </Center>
   </Container>

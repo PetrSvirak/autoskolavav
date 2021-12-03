@@ -1,6 +1,7 @@
-import { Td, Tr, Text } from "@chakra-ui/react";
+import { Td, Tr } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { createTable, TableHeaderItem } from "../Table";
+import { Text, TextType } from "../Text";
 
 export type Test = {
   name: string;
@@ -25,7 +26,7 @@ export const TestsTable: FunctionComponent<{
       <Tr>
         <Td>
           {name}
-          <Text fontSize="xs">{wholeName}</Text>
+          <Text type={TextType.Inline}>{wholeName}</Text>
         </Td>
         <Td>{price ? <>{price} Kč</> : note}</Td>
       </Tr>

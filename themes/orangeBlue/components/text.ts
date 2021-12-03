@@ -6,6 +6,16 @@ export const Text: ComponentStyleConfig = {
     fontWeight: "normal-text",
     fontSize: "16px",
     textColor: "complement-secondary",
-    px: "16px",
+  },
+  variants: {
+    em: {
+      fontStyle: "italic",
+    },
+    strong: {
+      fontWeight: "bold-text",
+    },
+    "body-of-text": {
+      pl: "16px",
+    },
   },
 };

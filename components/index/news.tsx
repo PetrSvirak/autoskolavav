@@ -1,6 +1,7 @@
-import { Box, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { Heading, HeadingType, Size } from "../Heading";
+import { Text } from "../Text";
 
 type NewsProps = {
   readonly news: readonly NewsViewType[];

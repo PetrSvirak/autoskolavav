@@ -15,7 +15,7 @@ export const Text: ComponentStyleConfig = {
       fontWeight: "bold-text",
     },
     "body-of-text": {
-      pl: "16px",
+      px: "16px",
     },
   },
 };

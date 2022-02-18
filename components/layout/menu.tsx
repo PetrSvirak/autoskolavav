@@ -1,14 +1,13 @@
 import { FunctionComponent, useRef } from "react";
 import {
+  Box,
   Button,
   Container,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
-  Heading,
   ListItem,
   Stack,
   useDisclosure,
@@ -66,8 +65,7 @@ const DrawerWrapper: FunctionComponent<{
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>Navigace</DrawerHeader>
-            <DrawerBody>{children(onClose)}</DrawerBody>
+            <DrawerBody py={8}>{children(onClose)}</DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
@@ -79,28 +77,30 @@ export const Menu = () => {
   const showMobileMenu = useShouldShowMobileMenu();
 
   return showMobileMenu ? (
-    <Stack>
-      <DrawerWrapper>
-        {(onClose) => (
-          <>
-            {routes.map(({ groupName, items }) => (
-              <Stack key={groupName}>
-                <Heading as="h2" textStyle="menu">
-                  {groupName}
-                </Heading>
-                <UnorderedList role="navigation" type={ListType.Menu}>
-                  {items.map(({ href, name }) => (
-                    <ListItem key={href} onClick={onClose} textStyle="link">
-                      <Link href={href} text={name} type={LinkType.Menu} />
-                    </ListItem>
-                  ))}
-                </UnorderedList>
-              </Stack>
-            ))}
-          </>
-        )}
-      </DrawerWrapper>
-    </Stack>
+    <DrawerWrapper>
+      {(onClose) => (
+        <Stack spacing={6}>
+          {routes.map(({ groupName, items }) => (
+            <Box key={groupName}>
+              <Container as="h2" mb={2} textStyle="menu">
+                {groupName}
+              </Container>
+              <UnorderedList role="navigation" type={ListType.MobileMenu}>
+                {items.map(({ href, name }) => (
+                  <ListItem
+                    key={href}
+                    onClick={onClose}
+                    textStyle="link"
+                  >
+                    <Link href={href} text={name} type={LinkType.MobileMenu} />
+                  </ListItem>
+                ))}
+              </UnorderedList>
+            </Box>
+          ))}
+        </Stack>
+      )}
+    </DrawerWrapper>
   ) : (
     <Stack spacing="70px" direction="row">
       {routes.map(({ groupName, items }) => (

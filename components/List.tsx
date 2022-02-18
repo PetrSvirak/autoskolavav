@@ -7,6 +7,7 @@ import React from "react";
 export enum ListType {
   BodyOfText = "body-of-text",
   Menu = "menu",
+  MobileMenu = "mobileMenu",
 }
 
 type Props = {

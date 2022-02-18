@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import { Link as ChakraLink } from "@chakra-ui/react";
+import { Button, Link as ChakraLink } from "@chakra-ui/react";
 import { isValidHttpUrl } from "../utilities/isValidUri";
 
 export enum LinkType {
   InSite = "InSite",
   Menu = "Menu",
+  MobileMenu = "MobileMenu",
   OutSite = "OutSite",
 }
 
@@ -26,6 +27,22 @@ const MenuLink = ({ href, text }) => {
     </NextLink>
   );
 };
+
+const MobileMenuLink = ({ href, text }) => (
+  <NextLink href={href} passHref>
+    <Button
+      as="a"
+      border={0}
+      fontWeight="normal"
+      size="md"
+      variant="ghost"
+      justifyContent="start"
+      w="100%"
+    >
+      {text}
+    </Button>
+  </NextLink>
+);
 
 const InSiteLink = ({ href, text }) => (
   <NextLink href={href} passHref>
@@ -49,6 +66,9 @@ export const Link: React.FC<LinkProps> = ({ type, ...sharedProps }) => {
   switch (type) {
     case LinkType.Menu:
       return <MenuLink {...sharedProps} />;
+
+    case LinkType.MobileMenu:
+      return <MobileMenuLink {...sharedProps} />;
 
     case LinkType.InSite:
       return <InSiteLink {...sharedProps} />;

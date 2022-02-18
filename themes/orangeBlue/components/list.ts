@@ -32,11 +32,24 @@ const menu: PartsStyleObject<typeof listAnatomy> = {
   icon: {},
 };
 
+const mobileMenu: PartsStyleObject<typeof listAnatomy> = {
+  container: {
+    marginInlineStart: 0,
+    ml: 0,
+  },
+  item: {
+    listStyle: "none",
+    mt: 0,
+  },
+  icon: {},
+};
+
 export const List: ComponentStyleConfig = {
   parts: listAnatomy.keys,
   baseStyle,
   variants: {
     "body-of-text": bodyOfText,
     menu,
+    mobileMenu,
   },
 };

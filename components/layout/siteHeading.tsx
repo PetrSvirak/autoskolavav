@@ -22,7 +22,7 @@ const Logo = () => (
 export const SiteHeading = () => (
   <Flex maxWidth="site" padding="26px">
     <Logo />
-    <Spacer width="space-menu" />
+    <Spacer />
     <Menu />
   </Flex>
 );

@@ -11,11 +11,11 @@ import {
   Heading,
   ListItem,
   Stack,
-  useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link, LinkType } from "../Link";
 import { ListType, UnorderedList } from "../List";
+import { useShouldShowMobileMenu } from "../../hooks/useShouldShowMobileMenu";
 
 const routes = [
   {
@@ -76,9 +76,9 @@ const DrawerWrapper: FunctionComponent<{
 };
 
 export const Menu = () => {
-  const shouldShowAsMenu = useBreakpointValue({ base: true, md: false });
+  const showMobileMenu = useShouldShowMobileMenu();
 
-  return shouldShowAsMenu ? (
+  return showMobileMenu ? (
     <Stack>
       <DrawerWrapper>
         {(onClose) => (
@@ -102,7 +102,7 @@ export const Menu = () => {
       </DrawerWrapper>
     </Stack>
   ) : (
-    <Stack spacing="70px" direction={"row"}>
+    <Stack spacing="70px" direction="row">
       {routes.map(({ groupName, items }) => (
         <Stack key={groupName} spacing={0}>
           <Container as="h2" textStyle="menu" padding="0">

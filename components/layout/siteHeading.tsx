@@ -20,7 +20,7 @@ const Logo = () => (
 );
 
 export const SiteHeading = () => (
-  <Flex maxWidth="site" padding="26px">
+  <Flex maxWidth="site" padding="26px" width="100%">
     <Logo />
     <Spacer />
     <Menu />

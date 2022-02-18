@@ -54,8 +54,8 @@ const DrawerWrapper: FunctionComponent<{
 
   return (
     <Stack>
-      <Button ref={btnRef} w="100%" onClick={onOpen}>
-        Navigace
+      <Button ref={btnRef} w="100%" onClick={onOpen} style={{ fontSize: 24 }}>
+        ☰
       </Button>
       <Drawer
         isOpen={isOpen}

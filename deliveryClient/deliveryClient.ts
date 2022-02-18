@@ -16,6 +16,7 @@ import { Test } from "./models/test";
 import { Workshop } from "./models/workshop";
 import { Vehicle } from "./models/vehicle";
 import { HomepagePhoto } from "./models/homepage_photo";
+import { News } from "./models/news";
 
 const getDeliveryClient = (): DeliveryClient => {
   const usePreviewMode = !!process.env.previewApiKey;
@@ -36,6 +37,7 @@ const getDeliveryClient = (): DeliveryClient => {
       new TypeResolver("forms", () => new Forms()),
       new TypeResolver("gallery", () => new Gallery()),
       new TypeResolver("link", () => new Link()),
+      new TypeResolver("news", () => new News()),
       new TypeResolver("phone_number", () => new PhoneNumber()),
       new TypeResolver("price", () => new Price()),
       new TypeResolver("price_list", () => new PriceList()),

@@ -7,27 +7,26 @@ import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { Actions } from "../components/index/actions";
 import { News } from "../components/index/news";
 import { Link } from "../deliveryClient/models/link";
+import { News as NewsModel } from "../deliveryClient/models/news";
 import { IContentItemsContainer } from "@kentico/kontent-delivery";
 import { HomepagePhoto } from "../deliveryClient/models/homepage_photo";
 
-const mapActionToActionViewType = (linkedItems: IContentItemsContainer) => (
-  action: Action
-): ActionViewType => ({
-  note: action.note.value,
-  subtitle: action.subtitle.value,
-  title: action.title.value,
-  moreInfoLink: action.moreInfoLink?.linkedItemCodenames.map((c) => {
-    const link = linkedItems[c] as Link;
-    if (link) {
-      return link.link.value;
-    }
-  })[0],
-});
+const mapActionToActionViewType =
+  (linkedItems: IContentItemsContainer) =>
+  (action: Action): ActionViewType => ({
+    note: action.note.value,
+    subtitle: action.subtitle.value,
+    title: action.title.value,
+    moreInfoLink: action.moreInfoLink?.linkedItemCodenames.map((c) => {
+      const link = linkedItems[c] as Link;
+      if (link) {
+        return link.link.value;
+      }
+    })[0],
+  });
 
-const mapActionToNewsViewType = (action: Action): NewsViewType => ({
-  note: action.note.value,
-  subtitle: action.subtitle.value,
-  title: action.title.value,
+const mapNewsToNewsViewType = (action: NewsModel): NewsViewType => ({
+  text: action.text.value,
 });
 
 export const getStaticProps = catchEmAllStatic(async () => {
@@ -41,13 +40,19 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .item<HomepagePhoto>("uvodni_foto")
     .toPromise();
 
+  const newsResult = await deliveryClient
+    .items<NewsModel>()
+    .type("news")
+    .orderByDescending("system.last_modified")
+    .toPromise();
+
   const actions = actionsResult?.items
     .filter((action) => action.type.value[0]?.codename === "important")
     .map<ActionViewType>(mapActionToActionViewType(actionsResult.linkedItems));
 
-  const news = actionsResult?.items
-    .filter((action) => action.type.value[0]?.codename === "informational")
-    .map<NewsViewType>(mapActionToNewsViewType);
+  const news = newsResult?.items
+    .slice(0, 3)
+    .map<NewsViewType>(mapNewsToNewsViewType);
 
   return {
     props: {

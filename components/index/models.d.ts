@@ -6,7 +6,5 @@ type ActionViewType = {
 };
 
 type NewsViewType = {
-  readonly note: string;
-  readonly subtitle: string;
-  readonly title: string;
+  readonly text: string;
 };

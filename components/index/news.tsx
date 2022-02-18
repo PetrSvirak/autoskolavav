@@ -14,7 +14,7 @@ export const News: FunctionComponent<NewsProps> = ({ news }) => (
     </Heading>
     {news.map((action, index) => (
       <Box bg="white" w="fit-content" p={1} key={index}>
-        <Text textStyle="news">{action.subtitle}</Text>
+        <Text textStyle="news">{action.text}</Text>
       </Box>
     ))}
   </Stack>

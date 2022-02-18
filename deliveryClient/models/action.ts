@@ -5,10 +5,9 @@ import { ContentItem, Elements } from "@kentico/kontent-delivery";
  * Tip: You can replace 'ContentItem' with another generated class to fully leverage strong typing.
  */
 export class Action extends ContentItem {
-  public type: Elements.MultipleChoiceElement;
-  public title: Elements.TextElement;
-  public subtitle: Elements.TextElement;
-  public note: Elements.TextElement;
+  public line1: Elements.TextElement;
+  public line2: Elements.TextElement;
+  public line3: Elements.TextElement;
   public moreInfoLink: Elements.RichTextElement;
 
   constructor() {

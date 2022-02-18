@@ -41,7 +41,7 @@ export const Actions: FunctionComponent<ActionsProps> = ({ actions }) => {
   );
 
   return (
-    <Center>
+    <Center height="320px" alignItems="baseline">
       <ActionItem
         action={actions[activeIndex]}
         onMouseEnter={pauseRotationAt(activeIndex)}

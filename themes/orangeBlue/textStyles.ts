@@ -21,7 +21,7 @@ export const textStyles = {
     fontFamily: "Open Sans, sans-serif",
     fontWeight: "bold-news",
     fontSize: "20px",
-    textColor: "complement-secondary",
+    color: "complement-primary",
     textAlign: "left",
   },
   "logo-head": {

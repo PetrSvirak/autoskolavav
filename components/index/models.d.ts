@@ -1,7 +1,5 @@
 type ActionViewType = {
-  readonly note: string;
-  readonly subtitle: string;
-  readonly title: string;
+  readonly text: string[];
   readonly moreInfoLink: string;
 };
 

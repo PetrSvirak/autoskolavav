@@ -14,9 +14,7 @@ import { HomepagePhoto } from "../deliveryClient/models/homepage_photo";
 const mapActionToActionViewType =
   (linkedItems: IContentItemsContainer) =>
   (action: Action): ActionViewType => ({
-    note: action.note.value,
-    subtitle: action.subtitle.value,
-    title: action.title.value,
+    text: [action.line1.value, action.line2.value, action.line3.value],
     moreInfoLink: action.moreInfoLink?.linkedItemCodenames.map((c) => {
       const link = linkedItems[c] as Link;
       if (link) {
@@ -47,7 +45,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .toPromise();
 
   const actions = actionsResult?.items
-    .filter((action) => action.type.value[0]?.codename === "important")
+    .slice(0, 5)
     .map<ActionViewType>(mapActionToActionViewType(actionsResult.linkedItems));
 
   const news = newsResult?.items

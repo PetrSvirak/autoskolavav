@@ -36,25 +36,25 @@ const parseElement = (element, index) => {
       );
     case "h1":
       return (
-        <Heading size={HeadingSize.H1} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H1} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h2":
       return (
-        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h3":
       return (
-        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h4":
       return (
-        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H2} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
@@ -62,6 +62,7 @@ const parseElement = (element, index) => {
       const href = element.attributes[1].value;
       return (
         <Link
+          key={index}
           type={isValidHttpUrl(href) ? LinkType.OutSite : LinkType.InSite}
           href={href}
           text={element.children.map((node, index) => parseNode(node, index))}

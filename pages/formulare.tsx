@@ -51,9 +51,9 @@ const renderForms = (forms: Form[]) => (
       <ListItem key={index}>
         {form.text}
         {form.src.map((s, index) => (
-          <>
-            <Link href={s}>[{getFileExtension(s)}]</Link>
-          </>
+          <Link key={index} href={s}>
+            [{getFileExtension(s)}]
+          </Link>
         ))}
       </ListItem>
     ))}

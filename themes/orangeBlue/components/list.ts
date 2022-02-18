@@ -16,11 +16,22 @@ const baseStyle: PartsStyleObject<typeof listAnatomy> = {
 };
 
 const bodyOfText: PartsStyleObject<typeof listAnatomy> = {
-  container: {
-    pl: "16px",
-    listStylePosition: "inside",
+  container: {},
+  item: {
+    ml: "calc(20px + 32px)",
+    mr: "16px",
+    listStylePosition: "outside",
   },
-  item: {},
+  icon: {},
+};
+
+const standAlone: PartsStyleObject<typeof listAnatomy> = {
+  container: {},
+  item: {
+    listStylePosition: "outside",
+    ml: "calc(20px + 16px)",
+    mr: "16px",
+  },
   icon: {},
 };
 
@@ -50,6 +61,7 @@ export const List: ComponentStyleConfig = {
   variants: {
     "body-of-text": bodyOfText,
     menu,
-    mobileMenu,
+    "mobile-menu": mobileMenu,
+    "stand-alone": standAlone,
   },
 };

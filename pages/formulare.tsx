@@ -46,7 +46,7 @@ const getFileExtension = (src: string) =>
   src.toUpperCase().split(/^.*\.(DOCX|DOC|PDF)$/)[1];
 
 const renderForms = (forms: Form[]) => (
-  <UnorderedList type={ListType.BodyOfText}>
+  <UnorderedList type={ListType.StandAlone}>
     {forms.map((form, index) => (
       <ListItem key={index}>
         {form.text}

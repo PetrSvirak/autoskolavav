@@ -6,8 +6,8 @@ import { createTable, TableHeaderItem } from "../Table";
 const Table = createTable<CourseDateType>();
 
 const headerItems: TableHeaderItem[] = [
-  { name: "Datum", isNumeric: true },
-  { name: "Volná místa" },
+  { name: "Datum" },
+  { name: "Volná místa", isNumeric: true },
 ];
 
 export const DatesTable: FunctionComponent<{
@@ -16,13 +16,14 @@ export const DatesTable: FunctionComponent<{
 }> = ({ dates, title }) => (
   <Table
     headerItems={headerItems}
+    maxWidth="300px"
     rows={dates}
     renderRow={({ date, freePlaces }) => (
       <Tr>
-        <Td isNumeric>
+        <Td>
           {formatDate(new Date(Date.parse(date.replace("Z", ""))))}
         </Td>
-        <Td>
+        <Td isNumeric>
           <Text color={freePlaces > 0 ? "green" : "red"}>{freePlaces}</Text>
         </Td>
       </Tr>

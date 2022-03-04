@@ -27,7 +27,12 @@ export const orangeBlueTheme = extendTheme({
   styles: {
     global: {
       "html, body, #__next": {
+        fontFamily: "Roboto Slab, serif",
+        fontWeight: "normal-text",
+        fontSize: "16px",
+        textColor: "complement-secondary",
         height: "100%",
+        lineHeight: "tall",
       },
     },
   },

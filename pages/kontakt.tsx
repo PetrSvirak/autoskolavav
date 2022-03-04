@@ -66,50 +66,53 @@ const Contact: NextPage<InferCreatorStaticPropsType<typeof getStaticProps>> = ({
   officeHoursNote,
   mapAssetLink,
   mapLink,
-}) => (
-  <StackedContentWithHeading pageName="Kontakt">
-    <Stack spacing={4}>
-      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
-        Adresa
-      </Heading>
-      <Box>
-        <Text type={TextType.BodyOfText}>
-          {street} {streetNumber}
-        </Text>
-        <Text type={TextType.BodyOfText}>
-          {city}, {zipCode}
-        </Text>
-      </Box>
-      {renderNote(addressNote)}
-    </Stack>
-    <Stack spacing={4}>
-      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
-        Telefon
-      </Heading>
-      {renderPhoneNumbers(phoneNumbers)}
-    </Stack>
-    <Stack spacing={4}>
-      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
-        E-mail
-      </Heading>
-      <Text type={TextType.BodyOfText}>{eMail}</Text>
-    </Stack>
-    <Stack spacing={4}>
-      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
-        Úřední hodiny
-      </Heading>
-      <Text type={TextType.BodyOfText}>{officeHours}</Text>
-      {renderNote(officeHoursNote)}
-    </Stack>
-    <Stack spacing={4}>
-      <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
-        Mapa
-      </Heading>
-      <a href={mapLink} target="_blank">
-        <Image src={mapAssetLink} />
-      </a>
-    </Stack>
-  </StackedContentWithHeading>
-);
+}) => {
+  const spacing = 2;
+  return (
+    <StackedContentWithHeading pageName="Kontakt">
+      <Stack spacing={spacing}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+          Adresa
+        </Heading>
+        <Box>
+          <Text type={TextType.BodyOfText}>
+            {street} {streetNumber}
+          </Text>
+          <Text type={TextType.BodyOfText}>
+            {city}, {zipCode}
+          </Text>
+        </Box>
+        {renderNote(addressNote)}
+      </Stack>
+      <Stack spacing={spacing}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+          Telefon
+        </Heading>
+        {renderPhoneNumbers(phoneNumbers)}
+      </Stack>
+      <Stack spacing={spacing}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+          E-mail
+        </Heading>
+        <Text type={TextType.BodyOfText}>{eMail}</Text>
+      </Stack>
+      <Stack spacing={spacing}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+          Úřední hodiny
+        </Heading>
+        <Text type={TextType.BodyOfText}>{officeHours}</Text>
+        {renderNote(officeHoursNote)}
+      </Stack>
+      <Stack spacing={spacing}>
+        <Heading size={HeadingSize.H2} type={HeadingType.Secondary}>
+          Mapa
+        </Heading>
+        <a href={mapLink} target="_blank">
+          <Image src={mapAssetLink} />
+        </a>
+      </Stack>
+    </StackedContentWithHeading>
+  );
+};
 
 export default Contact;

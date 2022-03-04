@@ -20,7 +20,7 @@ export const textStyles = {
   discounts: {
     fontFamily: "Open Sans, sans-serif",
     fontWeight: "bold-news",
-    fontSize: "20px",
+    fontSize: "18px",
     color: "complement-primary",
     textAlign: "left",
   },

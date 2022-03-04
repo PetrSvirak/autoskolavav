@@ -4,6 +4,8 @@ import React from "react";
 export enum HeadingSize {
   H1 = "h1",
   H2 = "h2",
+  H3 = "h3",
+  H4 = "h4"
 }
 
 export enum HeadingType {
@@ -19,6 +21,8 @@ type HeadingProps = Readonly<{
 const mapToAs: Record<HeadingSize, As> = {
   [HeadingSize.H1]: "h1",
   [HeadingSize.H2]: "h2",
+  [HeadingSize.H3]: "h3",
+  [HeadingSize.H4]: "h4",
 };
 
 export const Heading: React.FC<HeadingProps> = ({ size, type, children }) => (

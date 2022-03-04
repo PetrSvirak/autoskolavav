@@ -14,7 +14,7 @@ export const Heading: ComponentStyleConfig = {
   sizes: {
     h1: {
       fontWeight: 600,
-      fontSize: "32px",
+      fontSize: "25px",
     },
     h2: {
       fontWeight: 600,

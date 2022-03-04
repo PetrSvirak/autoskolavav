@@ -10,11 +10,11 @@ export const StackedContentWithHeading: React.FC<{ pageName: string }> = ({
   <Box width="100%">
     <Box margin="0 auto" maxW="site" padding="4">
       <ContentHead pageName={pageName} />
-      <Stack spacing={8}>
+      <Stack spacing={4}>
         <Heading size={HeadingSize.H1} type={HeadingType.Primary}>
           {pageName}
         </Heading>
-        {children}
+        <Stack spacing={6}>{children}</Stack>
       </Stack>
     </Box>
   </Box>

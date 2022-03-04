@@ -48,13 +48,13 @@ const parseElement = (element, index) => {
       );
     case "h3":
       return (
-        <Heading key={index} size={HeadingSize.H2} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H3} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
     case "h4":
       return (
-        <Heading key={index} size={HeadingSize.H2} type={HeadingType.Secondary}>
+        <Heading key={index} size={HeadingSize.H4} type={HeadingType.Secondary}>
           {element.children.map((node, index) => parseNode(node, index))}
         </Heading>
       );
@@ -108,7 +108,7 @@ export const ArticleHtmlParser: FunctionComponent<RichTextHtmlParserProps> = ({
   const parsedHtml = parse(html);
 
   return (
-    <Stack m="space-paragraph">
+    <Stack spacing={4}>
       {parsedHtml.map((node, index) => parseNode(node, index))}
     </Stack>
   );

@@ -13,7 +13,7 @@ export const CourseGroup: FunctionComponent<CourseGroupType> = ({
       {dates.length > 0 ? (
         <DatesTable dates={dates} title={name} />
       ) : (
-        <Text type={TextType.Inline}>{note}</Text>
+        <Text type={TextType.BodyOfText}>{note}</Text>
       )}
     </Stack>
   </Box>

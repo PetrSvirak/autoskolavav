@@ -20,9 +20,9 @@ const routes = [
   {
     groupName: "Informace",
     items: [
-      { name: "Fotogalerie", href: "/fotogalerie" },
       { name: "Kontakt", href: "/kontakt" },
       { name: "Formuláře", href: "/formulare" },
+      { name: "Fotogalerie", href: "/fotogalerie" }
     ],
   },
   {

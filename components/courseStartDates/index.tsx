@@ -15,20 +15,20 @@ export const createGetCourseStartDatesProps = (
   catchEmAllStatic(async () => {
     const termsPage = await deliveryClient.item<TermsPage>(type).toPromise();
 
-    const courseGroups = termsPage.item.terms.linkedItemCodenames
+    const courseGroups = termsPage.data.item.elements.terms.linkedItemCodenames
       .map((c) => {
-        const term = termsPage.linkedItems[c] as Term;
+        const term = termsPage.data.linkedItems[c] as Term;
         if (term) {
           return {
-            name: term.heading.value,
-            note: term.note.value,
-            dates: term.dates.linkedItemCodenames
+            name: term.elements.heading.value,
+            note: term.elements.note.value,
+            dates: term.elements.dates.linkedItemCodenames
               .map((c) => {
-                const date = termsPage.linkedItems[c] as SchoolDate;
+                const date = termsPage.data.linkedItems[c] as SchoolDate;
                 if (date) {
                   return {
-                    date: date.date.value.toISOString(),
-                    freePlaces: date.freePlaces.value,
+                    date: new Date(date.elements.date.value).toISOString(),
+                    freePlaces: date.elements.free_places.value,
                   };
                 }
               })

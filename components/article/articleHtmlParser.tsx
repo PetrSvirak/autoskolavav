@@ -105,7 +105,7 @@ const parseNode = (node, index) => {
 export const ArticleHtmlParser: FunctionComponent<RichTextHtmlParserProps> = ({
   html,
 }) => {
-  const parsedHtml = parse(html);
+  const parsedHtml = !!html ? parse(html) : [];
 
   return (
     <Stack spacing={4}>

@@ -25,8 +25,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Generate models
 
-Navigate to `/models` and run:
+Navigate to `/deliveryClient/models/` and run:
 
 ```bash
-kontent-generate --projectId=93665d46-fba8-0130-141c-dbb905222ba6 --moduleResolution=ES2015 --codeType=TypeScript
+#<prerequisite># npm i @kentico/kontent-model-generator -g
+kontent-generate --projectId=<rojectId> --moduleResolution=ES2015 --codeType=TypeScript
 ```

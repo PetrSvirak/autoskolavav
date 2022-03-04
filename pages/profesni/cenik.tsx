@@ -29,18 +29,18 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .type("vehicle")
     .toPromise();
 
-  const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.items);
+  const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.data.items);
 
   const workshops = getWorkshops(
-    professionalWorkshops,
+    professionalWorkshops.data,
     workshopsVehiclesMap,
     (workshop) =>
-      workshop.name.value + " " + workshop.numberOfHours.value + " hodin"
+      workshop.elements.name.value + " " + workshop.elements.number_of_hours.value + " hodin"
   );
 
   return {
     props: {
-      workshopsTitle: priceList.item.workshopsTitle.value,
+      workshopsTitle: priceList.data.item.elements.workshops_title.value,
       workshops,
     },
   };

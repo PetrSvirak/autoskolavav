@@ -14,17 +14,17 @@ import { HomepagePhoto } from "../deliveryClient/models/homepage_photo";
 const mapActionToActionViewType =
   (linkedItems: IContentItemsContainer) =>
   (action: Action): ActionViewType => ({
-    text: [action.line1.value, action.line2.value, action.line3.value],
-    moreInfoLink: action.moreInfoLink?.linkedItemCodenames.map((c) => {
+    text: [action.elements.line1.value, action.elements.line2.value, action.elements.line3.value],
+    moreInfoLink: action.elements.more_info_link?.linkedItemCodenames.map((c) => {
       const link = linkedItems[c] as Link;
       if (link) {
-        return link.link.value;
+        return link.elements.link.value;
       }
     })[0],
   });
 
 const mapNewsToNewsViewType = (action: NewsModel): NewsViewType => ({
-  text: action.text.value,
+  text: action.elements.text.value,
 });
 
 export const getStaticProps = catchEmAllStatic(async () => {
@@ -44,11 +44,11 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .orderByDescending("system.last_modified")
     .toPromise();
 
-  const actions = actionsResult?.items
+  const actions = actionsResult?.data.items
     .slice(0, 5)
-    .map<ActionViewType>(mapActionToActionViewType(actionsResult.linkedItems));
+    .map<ActionViewType>(mapActionToActionViewType(actionsResult.data.linkedItems));
 
-  const news = newsResult?.items
+  const news = newsResult?.data.items
     .slice(0, 3)
     .map<NewsViewType>(mapNewsToNewsViewType);
 
@@ -56,7 +56,7 @@ export const getStaticProps = catchEmAllStatic(async () => {
     props: {
       actions,
       news,
-      homepagePhotoUrl: homepagePhoto.item.photo.value[0].url,
+      homepagePhotoUrl: homepagePhoto.data.item.elements.photo.value[0].url,
     },
   };
 });

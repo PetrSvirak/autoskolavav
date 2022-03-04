@@ -35,41 +35,41 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .type("vehicle")
     .toPromise();
 
-  const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.items);
+  const workshopsVehiclesMap = createWorkshopsVehiclesMap(allVehicles.data.items);
 
   const workshops = getWorkshops(
-    classicWorkshops,
+    classicWorkshops.data,
     workshopsVehiclesMap,
-    (workshop) => workshop.name.value
+    (workshop) => workshop.elements.name.value
   );
 
-  const vehiclesWithPrice = allVehicles.items
-    .filter((vehicle) => vehicle.priceFor90Minutes.value !== null)
+  const vehiclesWithPrice = allVehicles.data.items
+    .filter((vehicle) => vehicle.elements.price_for_90_minutes.value !== null)
     .map(
       (vehicle): VehicleRidePrice => ({
-        vehicleName: vehicle.name.value,
-        price: vehicle.priceFor90Minutes.value,
+        vehicleName: vehicle.elements.name.value,
+        price: vehicle.elements.price_for_90_minutes.value,
       })
     );
 
-  const tests = priceList.item.tests.linkedItemCodenames
-    .map((c) => priceList.linkedItems[c] as TestModel)
+  const tests = priceList.data.item.elements.tests.linkedItemCodenames
+    .map((c) => priceList.data.linkedItems[c] as TestModel)
     .filter((x) => x !== undefined)
     .map(
       (item): Test => ({
-        name: item.name.value,
-        note: item.note.value,
-        wholeName: item.wholeName.value,
-        price: item.price.value,
+        name: item.elements.name.value,
+        note: item.elements.note.value,
+        wholeName: item.elements.whole_name.value,
+        price: item.elements.price.value,
       })
     );
 
   return {
     props: {
-      priceForDowntime: priceList.item.priceForDowntime.value,
-      workshopsTitle: priceList.item.workshopsTitle.value,
-      anotherRidesTitle: priceList.item.anotherRidesTitle.value,
-      testsTitle: priceList.item.testsTitle.value,
+      priceForDowntime: priceList.data.item.elements.price_for_downtime.value,
+      workshopsTitle: priceList.data.item.elements.workshops_title.value,
+      anotherRidesTitle: priceList.data.item.elements.another_rides_title.value,
+      testsTitle: priceList.data.item.elements.tests_title.value,
       workshops,
       tests,
       vehiclesWithPrice,

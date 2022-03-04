@@ -4,11 +4,11 @@ import { deliveryClient } from "../deliveryClient/deliveryClient";
 import { Vehicle } from "../deliveryClient/models/vehicle";
 import { Box, Image, SimpleGrid, Stack, useDisclosure } from "@chakra-ui/react";
 import { Gallery } from "../deliveryClient/models/gallery";
-import { ElementModels } from "@kentico/kontent-delivery/_commonjs/elements/element-models";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { ModalWindow } from "../components/ModalWindow";
 import { Heading, HeadingType, HeadingSize } from "../components/Heading";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
+import {ElementModels} from "@kentico/kontent-delivery";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;
@@ -20,10 +20,10 @@ type PhotoGalleryViewModel = {
 const convertVehicleToPhotoGalleryViewModel = (
   vehicle: Vehicle
 ): PhotoGalleryViewModel => ({
-  name: vehicle.name.value,
-  photoSrc: vehicle.photo.value[0].url,
-  typeCodeName: vehicle.type.value[0].codename,
-  typeName: vehicle.type.value[0].name,
+  name: vehicle.elements.name.value,
+  photoSrc: vehicle.elements.photo.value[0].url,
+  typeCodeName: vehicle.elements.type.value[0].codename,
+  typeName: vehicle.elements.type.value[0].name,
 });
 
 const convertOtherToPhotoGalleryViewModel = (
@@ -40,14 +40,14 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .items<Vehicle>()
     .type("vehicle")
     .toPromise();
-  const vehicles = vehiclesResult.items
-    .filter((item) => item.photo.value[0])
+  const vehicles = vehiclesResult.data.items
+    .filter((item) => item.elements.photo.value[0])
     .map(convertVehicleToPhotoGalleryViewModel);
 
   const otherPhotosResult = await deliveryClient
     .item<Gallery>("gallery")
     .toPromise();
-  const others = otherPhotosResult.item.anotherGalleryPictures.value.map(
+  const others = otherPhotosResult.data.item.elements.another_gallery_pictures.value.map(
     convertOtherToPhotoGalleryViewModel
   );
 

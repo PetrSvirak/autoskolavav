@@ -15,24 +15,24 @@ export const getStaticProps = catchEmAllStatic(async () => {
     .item<ContactModel>("contact")
     .toPromise();
 
-  const phoneNumbers = contactItem.item.phone.linkedItemCodenames.map(
+  const phoneNumbers = contactItem.data.item.elements.phone.linkedItemCodenames.map(
     (codename) =>
-      (contactItem.linkedItems[codename] as PhoneNumberModel).number.value
+      (contactItem.data.linkedItems[codename] as PhoneNumberModel).elements.number.value
   );
 
   return {
     props: {
-      street: contactItem.item.street.value,
-      streetNumber: contactItem.item.streetNumber.value,
-      city: contactItem.item.city.value,
-      zipCode: contactItem.item.zipCode.value,
-      addressNote: contactItem.item.addressNote.value,
+      street: contactItem.data.item.elements.street.value,
+      streetNumber: contactItem.data.item.elements.street_number.value,
+      city: contactItem.data.item.elements.city.value,
+      zipCode: contactItem.data.item.elements.zip_code.value,
+      addressNote: contactItem.data.item.elements.address___note.value,
       phoneNumbers,
-      eMail: contactItem.item.eMail.value,
-      officeHours: contactItem.item.officeHours.value,
-      officeHoursNote: contactItem.item.officeHoursNote.value,
-      mapAssetLink: contactItem.item.map.value[0].url,
-      mapLink: contactItem.item.mapLink.value,
+      eMail: contactItem.data.item.elements.e_mail.value,
+      officeHours: contactItem.data.item.elements.office_hours.value,
+      officeHoursNote: contactItem.data.item.elements.office_hours___note.value,
+      mapAssetLink: contactItem.data.item.elements.map.value[0].url,
+      mapLink: contactItem.data.item.elements.map_link.value,
     },
   };
 });

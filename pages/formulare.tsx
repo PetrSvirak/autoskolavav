@@ -15,23 +15,23 @@ type Form = {
 };
 
 const convertFormModelToForm = (form: FormModel): Form => ({
-  text: form.text.value,
-  src: form.forms.value.map((f) => f.url),
+  text: form.elements.text.value,
+  src: form.elements.forms.value.map((f) => f.url),
 });
 
 export const getStaticProps = catchEmAllStatic(async () => {
   const formsItem = await deliveryClient.item<FormsModel>("forms").toPromise();
 
-  const forms = formsItem.item.forms.linkedItemCodenames.map(
-    (codename) => formsItem.linkedItems[codename] as FormModel
+  const forms = formsItem.data.item.elements.forms.linkedItemCodenames.map(
+    (codename) => formsItem.data.linkedItems[codename] as FormModel
   );
 
   const ordinaryDriversForms = forms
-    .filter((form) => form.drivers.value[0].codename === "ordinary_drivers")
+    .filter((form) => form.elements.drivers.value[0].codename === "ordinary_drivers")
     .map(convertFormModelToForm);
 
   const professionalDriversForms = forms
-    .filter((form) => form.drivers.value[0].codename === "professional_drivers")
+    .filter((form) => form.elements.drivers.value[0].codename === "professional_drivers")
     .map(convertFormModelToForm);
 
   return {

@@ -44,6 +44,12 @@ export const textStyles = {
     fontSize: "32px",
     textColor: "secondary",
   },
+  "contact-detail-heading": {
+    fontFamily: "DM Serif Display, serif",
+    fontWeight: 400,
+    fontSize: "16px",
+    textColor: "complement-secondary",
+  },
   menu: {
     fontFamily: "DM Serif Display, serif",
     fontWeight: "bold-heading",

@@ -35,7 +35,9 @@ export const ActionItem: FunctionComponent<ActionItemProps> = ({
   >
     <Stack spacing={4}>
       {action.text.map((line) => (
-        <Text textStyle="discounts">{line}</Text>
+        <Text key={line} textStyle="discounts">
+          {line}
+        </Text>
       ))}
       <Button type={ButtonType.Primary}>
         <NextLink href={action.moreInfoLink}>VÍCE INFORMACÍ</NextLink>

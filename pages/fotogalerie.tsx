@@ -6,9 +6,9 @@ import { Box, Image, SimpleGrid, Stack, useDisclosure } from "@chakra-ui/react";
 import { Gallery } from "../deliveryClient/models/gallery";
 import { catchEmAllStatic } from "../utilities/catchEmAllStatic";
 import { ModalWindow } from "../components/ModalWindow";
-import { Heading, HeadingType, HeadingSize } from "../components/Heading";
+import { Heading, HeadingSize, HeadingType } from "../components/Heading";
 import { StackedContentWithHeading } from "../components/layout/stackedContentWithHeading";
-import {ElementModels} from "@kentico/kontent-delivery";
+import { ElementModels } from "@kentico/kontent-delivery";
 
 type PhotoGalleryViewModel = {
   readonly photoSrc: string;
@@ -47,9 +47,10 @@ export const getStaticProps = catchEmAllStatic(async () => {
   const otherPhotosResult = await deliveryClient
     .item<Gallery>("gallery")
     .toPromise();
-  const others = otherPhotosResult.data.item.elements.another_gallery_pictures.value.map(
-    convertOtherToPhotoGalleryViewModel
-  );
+  const others =
+    otherPhotosResult.data.item.elements.another_gallery_pictures.value.map(
+      convertOtherToPhotoGalleryViewModel
+    );
 
   const photos = [...vehicles, ...others]
     .reduce<Map<string, readonly PhotoGalleryViewModel[]>>(
@@ -78,10 +79,8 @@ const PhotoGallery: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ photosByType }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [
-    selectedImage,
-    setSelectedImage,
-  ] = React.useState<PhotoGalleryViewModel>(null);
+  const [selectedImage, setSelectedImage] =
+    React.useState<PhotoGalleryViewModel>(null);
   const close = () => {
     onClose();
     setSelectedImage(null);
@@ -99,8 +98,9 @@ const PhotoGallery: NextPage<
       >
         <Image
           src={`${selectedImage?.photoSrc}?w=1200&h=800`}
-          width="1200px"
-          height="800px"
+          marginX="auto"
+          max-width="1200px"
+          max-height="800px"
         />
       </ModalWindow>
       <Stack spacing={8}>
